@@ -49,7 +49,8 @@ export const AboutMe = {
           padding: 3px 8px 2px 8px;
           margin-right: 3px;
           background: var(--win-bg);
-          border: 1px solid;
+          border: 1.5px solid;
+          border-bottom: none;
           border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
           cursor: pointer;
           z-index: 0;
@@ -73,7 +74,7 @@ export const AboutMe = {
         
         .about-content {
           flex: 1;
-          border: 2px solid;
+          border: 1.5px solid;
           border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
           padding: 16px;
           background: var(--win-bg);

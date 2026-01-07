@@ -214,26 +214,53 @@
   color: var(--win-selection-text);
 }
 
-/* Status Bar */
+/* Status Bar - Win98 Authentic Style */
 .window-statusbar {
   display: flex;
   align-items: center;
-  height: 20px;
-  padding: 2px 4px;
-  border-top: 1px solid var(--win-border-light);
+  min-height: 20px;
+  padding: 2px 2px;
   background: var(--win-bg);
-  font-size: 11px;
+  gap: 2px;
 }
 
 .window-statusbar-section {
-  padding: 0 8px;
-  border-right: 1px solid var(--win-border-darker);
-  box-shadow: 1px 0 0 var(--win-border-light);
+  display: flex;
+  align-items: center;
+  padding: 1px 6px;
+  min-height: 16px;
+  /* Sunken 3D effect */
+  border: 1px solid;
+  border-color: var(--win-border-darker) var(--win-border-light) var(--win-border-light) var(--win-border-darker);
+  background: var(--win-bg);
 }
 
-.window-statusbar-section:last-child {
-  border-right: none;
-  box-shadow: none;
+.window-statusbar-section:first-child {
+  flex: 1;
+}
+
+.window-statusbar-section.fixed {
+  flex: none;
+}
+
+/* Resize Grip in Status Bar */
+.window-statusbar-grip {
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(135deg,
+      transparent 0%, transparent 30%,
+      var(--win-border-light) 30%, var(--win-border-light) 35%,
+      var(--win-border-darker) 35%, var(--win-border-darker) 40%,
+      transparent 40%, transparent 60%,
+      var(--win-border-light) 60%, var(--win-border-light) 65%,
+      var(--win-border-darker) 65%, var(--win-border-darker) 70%,
+      transparent 70%, transparent 90%,
+      var(--win-border-light) 90%, var(--win-border-light) 95%,
+      var(--win-border-darker) 95%
+    );
+  cursor: se-resize;
+  margin-left: auto;
 }
 
 /* ==========================================================================

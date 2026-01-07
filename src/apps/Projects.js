@@ -72,39 +72,122 @@ export const Projects = {
           display: flex;
           flex-direction: column;
         }
+        /* Win98 Toolbar Style */
         .projects-toolbar {
           display: flex;
-          gap: 4px;
-          padding: 4px;
-          border-bottom: 1px solid var(--win-border-darker);
+          align-items: flex-end;
+          gap: 0;
+          padding: 2px 4px 2px 4px;
           background: var(--win-bg);
+          border-bottom: 1px solid var(--win-border-darker);
+          box-shadow: 0 1px 0 var(--win-border-light);
         }
-        .projects-toolbar button {
-          padding: 2px 8px;
+        .toolbar-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+          min-width: 36px;
+          padding: 2px 4px 1px 4px;
           background: var(--win-bg);
           border: 1px solid transparent;
           cursor: pointer;
-          font-size: 11px;
+          font-size: 10px;
+          font-family: var(--win-font);
         }
-        .projects-toolbar button:hover {
+        .toolbar-btn:hover {
+          border: 1px solid;
           border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
         }
+        .toolbar-btn:active {
+          border: 1px solid;
+          border-color: var(--win-border-dark) var(--win-border-light) var(--win-border-light) var(--win-border-dark);
+        }
+        .toolbar-btn.disabled {
+          opacity: 0.5;
+          cursor: default;
+        }
+        .toolbar-btn.disabled:hover {
+          border-color: transparent;
+        }
+        .toolbar-btn-icon {
+          width: 20px;
+          height: 20px;
+          margin-bottom: 1px;
+        }
+        .toolbar-btn-label {
+          font-size: 10px;
+          white-space: nowrap;
+        }
+        .toolbar-separator {
+          width: 2px;
+          height: 36px;
+          margin: 0 3px;
+          background: var(--win-border-darker);
+          box-shadow: 1px 0 0 var(--win-border-light);
+        }
+        /* Win98 Address Bar Style */
         .projects-address {
           display: flex;
           align-items: center;
-          gap: 8px;
-          padding: 4px 8px;
-          border-bottom: 1px solid var(--win-border-darker);
+          gap: 4px;
+          padding: 3px 4px;
           background: var(--win-bg);
+          border-bottom: 1px solid var(--win-border-darker);
+          box-shadow: 0 1px 0 var(--win-border-light);
         }
-        .projects-address-input {
+        .projects-address-label {
+          font-size: 11px;
+          padding-right: 2px;
+        }
+        .address-combo {
           flex: 1;
-          height: 20px;
+          display: flex;
+          position: relative;
+        }
+        .address-combo-input {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          height: 21px;
           padding: 2px 4px;
+          padding-right: 20px;
           border: 2px solid;
           border-color: var(--win-border-darker) var(--win-border-light) var(--win-border-light) var(--win-border-darker);
-          background: white;
+          box-shadow: inset 1px 1px 0 var(--win-border-dark);
+          background: var(--win-white);
           font-size: 11px;
+          font-family: var(--win-font);
+        }
+        .address-combo-icon {
+          width: 16px;
+          height: 16px;
+          flex-shrink: 0;
+        }
+        .address-combo-btn {
+          position: absolute;
+          right: 2px;
+          top: 2px;
+          width: 16px;
+          height: calc(100% - 4px);
+          background: var(--win-bg);
+          border: 2px solid;
+          border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .address-combo-btn::after {
+          content: '';
+          border: 4px solid transparent;
+          border-top-color: var(--win-black);
+          border-top-width: 4px;
+          margin-top: 3px;
+        }
+        .address-combo-btn:active {
+          border-color: var(--win-border-dark) var(--win-border-light) var(--win-border-light) var(--win-border-dark);
         }
         .projects-content {
           flex: 1;
@@ -172,26 +255,120 @@ export const Projects = {
           padding: 2px 6px;
           font-size: 10px;
         }
+        /* Win98 Status Bar Style */
         .projects-statusbar {
           display: flex;
           align-items: center;
-          padding: 2px 8px;
-          border-top: 2px solid var(--win-border-light);
+          min-height: 20px;
+          padding: 2px 2px;
           background: var(--win-bg);
+          gap: 2px;
+        }
+        .projects-statusbar-section {
+          display: flex;
+          align-items: center;
+          padding: 1px 6px;
+          min-height: 16px;
           font-size: 11px;
+          /* Sunken 3D effect */
+          border: 1px solid;
+          border-color: var(--win-border-darker) var(--win-border-light) var(--win-border-light) var(--win-border-darker);
+        }
+        .projects-statusbar-section:first-child {
+          flex: 1;
         }
       </style>
       
       <div class="projects-container">
         <div class="projects-toolbar">
-          <button>Back</button>
-          <button>Forward</button>
-          <button>Up</button>
+          <div class="toolbar-btn disabled">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M12 4L6 10L12 16" stroke="#000" stroke-width="2"/>
+            </svg>
+            <span class="toolbar-btn-label">Back</span>
+          </div>
+          <div class="toolbar-btn disabled">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M8 4L14 10L8 16" stroke="#000" stroke-width="2"/>
+            </svg>
+            <span class="toolbar-btn-label">Forward</span>
+          </div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M3 10H17M10 3L10 10" stroke="#000" stroke-width="2"/>
+              <rect x="3" y="10" width="14" height="8" fill="#ffcc00" stroke="#000"/>
+            </svg>
+            <span class="toolbar-btn-label">Up</span>
+          </div>
+          <div class="toolbar-separator"></div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="3" width="6" height="14" fill="#c0c0c0" stroke="#000"/>
+              <rect x="11" y="3" width="6" height="14" fill="#c0c0c0" stroke="#000"/>
+              <line x1="6" y1="10" x2="14" y2="10" stroke="#000" stroke-dasharray="2"/>
+            </svg>
+            <span class="toolbar-btn-label">Cut</span>
+          </div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="10" height="12" fill="#fff" stroke="#000"/>
+              <rect x="6" y="2" width="10" height="12" fill="#fff" stroke="#000"/>
+            </svg>
+            <span class="toolbar-btn-label">Copy</span>
+          </div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <rect x="4" y="6" width="12" height="10" fill="#fff" stroke="#000"/>
+              <rect x="6" y="4" width="8" height="4" fill="#c0c0c0" stroke="#000"/>
+            </svg>
+            <span class="toolbar-btn-label">Paste</span>
+          </div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <path d="M4 14C6 8 10 6 16 6" stroke="#000" stroke-width="2"/>
+              <path d="M12 3L16 6L12 9" stroke="#000" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="toolbar-btn-label">Undo</span>
+          </div>
+          <div class="toolbar-separator"></div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <line x1="4" y1="4" x2="16" y2="16" stroke="#000" stroke-width="2"/>
+              <line x1="16" y1="4" x2="4" y2="16" stroke="#000" stroke-width="2"/>
+            </svg>
+            <span class="toolbar-btn-label">Delete</span>
+          </div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="3" width="14" height="14" fill="#fff" stroke="#000"/>
+              <line x1="3" y1="7" x2="17" y2="7" stroke="#000"/>
+              <line x1="7" y1="7" x2="7" y2="17" stroke="#000"/>
+            </svg>
+            <span class="toolbar-btn-label">Properties</span>
+          </div>
+          <div class="toolbar-separator"></div>
+          <div class="toolbar-btn">
+            <svg class="toolbar-btn-icon" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="3" width="6" height="6" fill="#ffcc00" stroke="#000"/>
+              <rect x="10" y="3" width="6" height="6" fill="#ffcc00" stroke="#000"/>
+              <rect x="2" y="11" width="6" height="6" fill="#ffcc00" stroke="#000"/>
+              <rect x="10" y="11" width="6" height="6" fill="#ffcc00" stroke="#000"/>
+            </svg>
+            <span class="toolbar-btn-label">Views</span>
+          </div>
         </div>
-        
+
         <div class="projects-address">
-          <span>Address:</span>
-          <input class="projects-address-input" value="C:\\Projects\\" readonly>
+          <span class="projects-address-label">Address</span>
+          <div class="address-combo">
+            <div class="address-combo-input">
+              <svg class="address-combo-icon" viewBox="0 0 16 16">
+                <path d="M1 4L6 4L7 2L15 2L15 14L1 14Z" fill="#ffcc00" stroke="#000" stroke-width="0.5"/>
+              </svg>
+              <span>C:\\Projects\\</span>
+            </div>
+            <div class="address-combo-btn"></div>
+          </div>
         </div>
         
         <div class="projects-content">
@@ -212,7 +389,7 @@ export const Projects = {
         </div>
         
         <div class="projects-statusbar">
-          <span>${projects.length} object(s)</span>
+          <span class="projects-statusbar-section">${projects.length} object(s)</span>
         </div>
       </div>
       
