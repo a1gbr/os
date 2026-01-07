@@ -1,0 +1,343 @@
+/* ==========================================================================
+   Windows 98 Taskbar Styles
+   ========================================================================== */
+
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--taskbar-height);
+  background: var(--win-bg);
+  border-top: 2px solid var(--win-border-light);
+  display: flex;
+  align-items: center;
+  padding: 2px 2px;
+  z-index: 9999;
+  box-shadow: inset 0 1px 0 var(--win-bg-light);
+}
+
+/* ==========================================================================
+   Start Button
+   ========================================================================== */
+
+.start-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.start-button:active,
+.start-button.active {
+  border-color: var(--win-border-dark) var(--win-border-light) var(--win-border-light) var(--win-border-dark);
+  box-shadow: inset 1px 1px 0 var(--win-border-darker);
+  padding: 1px 5px 0 7px;
+}
+
+.start-button-logo {
+  width: 16px;
+  height: 16px;
+}
+
+/* Windows Logo SVG */
+.start-button-logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   Taskbar Divider
+   ========================================================================== */
+
+.taskbar-divider {
+  width: 2px;
+  height: 22px;
+  margin: 0 4px;
+  background: var(--win-border-darker);
+  box-shadow: 1px 0 0 var(--win-border-light);
+}
+
+/* ==========================================================================
+   Quick Launch
+   ========================================================================== */
+
+.quick-launch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 4px;
+}
+
+.quick-launch-icon {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.quick-launch-icon:hover {
+  border: 1px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+}
+
+.quick-launch-icon img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+/* ==========================================================================
+   Window Buttons Area
+   ========================================================================== */
+
+.taskbar-windows {
+  display: flex;
+  flex: 1;
+  gap: 3px;
+  overflow: hidden;
+  padding: 0 4px;
+}
+
+.taskbar-window-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 120px;
+  max-width: 180px;
+  height: 22px;
+  padding: 0 8px;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker);
+  cursor: pointer;
+  font-size: 11px;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+
+.taskbar-window-btn:hover {
+  background: var(--win-bg-light);
+}
+
+.taskbar-window-btn.active {
+  border-color: var(--win-border-dark) var(--win-border-light) var(--win-border-light) var(--win-border-dark);
+  box-shadow: inset 1px 1px 0 var(--win-border-darker);
+  background: 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="1" height="1" fill="%23ffffff"/><rect x="1" y="1" width="1" height="1" fill="%23ffffff"/></svg>'),
+    var(--win-bg);
+  background-size: 2px 2px;
+}
+
+.taskbar-window-btn.minimized {
+  /* Normal raised state for minimized windows */
+}
+
+.taskbar-window-btn-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.taskbar-window-btn-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   System Tray
+   ========================================================================== */
+
+.system-tray {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  margin-left: auto;
+  border: 1px solid;
+  border-color: var(--win-border-darker) var(--win-border-light) var(--win-border-light) var(--win-border-darker);
+  background: var(--win-bg);
+  gap: 6px;
+}
+
+.tray-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.tray-clock {
+  font-size: 11px;
+  padding-left: 8px;
+  cursor: default;
+}
+
+/* ==========================================================================
+   Start Menu
+   ========================================================================== */
+
+#start-menu {
+  position: fixed;
+  bottom: var(--taskbar-height);
+  left: 0;
+  display: none;
+  z-index: 9998;
+}
+
+#start-menu.open {
+  display: block;
+}
+
+.start-menu {
+  display: flex;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker),
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+}
+
+/* Left Banner */
+.start-menu-banner {
+  width: 24px;
+  background: linear-gradient(180deg, #000080 0%, #1084d0 100%);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 8px;
+  justify-content: center;
+}
+
+.start-menu-banner-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--win-white);
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Menu Items */
+.start-menu-items {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  flex: 1;
+}
+
+.start-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 24px 6px 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.start-menu-item:hover {
+  background: var(--win-selection);
+  color: var(--win-selection-text);
+}
+
+.start-menu-item-icon {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.start-menu-item-icon.small {
+  width: 16px;
+  height: 16px;
+}
+
+.start-menu-item-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.start-menu-item-title {
+  font-weight: normal;
+}
+
+.start-menu-item-subtitle {
+  font-size: 10px;
+  color: var(--win-border-darker);
+}
+
+.start-menu-item:hover .start-menu-item-subtitle {
+  color: var(--win-bg-light);
+}
+
+.start-menu-separator {
+  height: 1px;
+  background: var(--win-border-darker);
+  box-shadow: 0 1px 0 var(--win-border-light);
+  margin: 4px 4px;
+}
+
+.start-menu-arrow {
+  position: absolute;
+  right: 8px;
+  font-size: 10px;
+}
+
+/* Submenu */
+.start-submenu {
+  position: absolute;
+  left: 100%;
+  top: -2px;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker),
+    2px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 2px;
+  min-width: 160px;
+  display: none;
+}
+
+.start-menu-item:hover > .start-submenu {
+  display: block;
+}
+
+.start-submenu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px 4px 8px;
+  cursor: pointer;
+}
+
+.start-submenu-item:hover {
+  background: var(--win-selection);
+  color: var(--win-selection-text);
+}
+
+.start-submenu-item-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}

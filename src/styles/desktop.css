@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Windows 98 Desktop Styles
+   ========================================================================== */
+
+#desktop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--taskbar-height));
+  background: var(--win-desktop);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Desktop Icons
+   ========================================================================== */
+
+.desktop-icons {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  max-height: calc(100% - 16px);
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: var(--grid-size);
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.desktop-icon:hover .desktop-icon-label,
+.desktop-icon:focus .desktop-icon-label {
+  background: var(--win-selection);
+  color: var(--win-selection-text);
+}
+
+.desktop-icon.selected .desktop-icon-image {
+  filter: brightness(0.7) sepia(1) hue-rotate(180deg) saturate(3);
+}
+
+.desktop-icon.selected .desktop-icon-label {
+  background: var(--win-selection);
+  color: var(--win-selection-text);
+}
+
+.desktop-icon-image {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  image-rendering: pixelated;
+  margin-bottom: 4px;
+  pointer-events: none;
+}
+
+.desktop-icon-label {
+  font-size: 11px;
+  color: var(--win-white);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  padding: 1px 2px;
+  max-width: 100%;
+  word-wrap: break-word;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   Desktop Drag Selection (Marquee)
+   ========================================================================== */
+
+.desktop-selection {
+  position: absolute;
+  border: 1px dotted var(--win-white);
+  background: rgba(0, 0, 128, 0.2);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ==========================================================================
+   Context Menu
+   ========================================================================== */
+
+.context-menu {
+  position: fixed;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker),
+    2px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 2px;
+  min-width: 150px;
+  z-index: 10000;
+}
+
+.context-menu-item {
+  padding: 4px 24px 4px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.context-menu-item:hover {
+  background: var(--win-selection);
+  color: var(--win-selection-text);
+}
+
+.context-menu-item.disabled {
+  color: var(--win-border-darker);
+  text-shadow: 1px 1px 0 var(--win-white);
+  cursor: default;
+}
+
+.context-menu-item.disabled:hover {
+  background: transparent;
+  color: var(--win-border-darker);
+}
+
+.context-menu-item-icon {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 4px;
+}
+
+.context-menu-separator {
+  height: 1px;
+  background: var(--win-border-darker);
+  box-shadow: 0 1px 0 var(--win-border-light);
+  margin: 4px 2px;
+}
+
+.context-menu-submenu-arrow {
+  position: absolute;
+  right: 8px;
+  font-size: 8px;
+}
+
+/* ==========================================================================
+   Desktop Wallpaper Patterns
+   ========================================================================== */
+
+#desktop.wallpaper-clouds {
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 40%),
+    var(--win-desktop);
+}
+
+#desktop.wallpaper-pattern {
+  background: 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="4" height="4" fill="%23007070"/><rect x="4" y="4" width="4" height="4" fill="%23007070"/></svg>');
+  background-size: 8px 8px;
+}

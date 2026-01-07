@@ -1,0 +1,337 @@
+/* ==========================================================================
+   Windows 98 Window Chrome Styles
+   ========================================================================== */
+
+#window-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--taskbar-height));
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ==========================================================================
+   Window Frame
+   ========================================================================== */
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker),
+    2px 2px 8px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  min-height: 100px;
+  pointer-events: auto;
+  animation: windowOpen 0.15s ease-out;
+}
+
+.window.closing {
+  animation: windowClose 0.1s ease-in forwards;
+}
+
+.window.minimizing {
+  animation: windowMinimize 0.2s ease-in forwards;
+}
+
+.window.restoring {
+  animation: windowRestore 0.2s ease-out forwards;
+}
+
+.window.maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: calc(100vh - var(--taskbar-height)) !important;
+  border-width: 0;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Title Bar
+   ========================================================================== */
+
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  height: var(--titlebar-height);
+  padding: 2px 3px;
+  background: var(--win-active-title);
+  cursor: move;
+  flex-shrink: 0;
+}
+
+.window.inactive .window-titlebar {
+  background: var(--win-inactive-title);
+}
+
+.window-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.window-title {
+  flex: 1;
+  color: var(--win-active-title-text);
+  font-weight: bold;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: none;
+  letter-spacing: 0;
+}
+
+.window.inactive .window-title {
+  color: var(--win-inactive-title-text);
+}
+
+/* ==========================================================================
+   Title Bar Buttons
+   ========================================================================== */
+
+.window-controls {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.window-btn {
+  width: 16px;
+  height: 14px;
+  background: var(--win-bg);
+  border: 2px solid;
+  border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+  box-shadow: 
+    inset 1px 1px 0 var(--win-bg-light),
+    inset -1px -1px 0 var(--win-border-darker);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Marlett', sans-serif;
+  font-size: 8px;
+  line-height: 1;
+}
+
+.window-btn:active {
+  border-color: var(--win-border-dark) var(--win-border-light) var(--win-border-light) var(--win-border-dark);
+  box-shadow: inset 1px 1px 0 var(--win-border-darker);
+  padding: 1px 0 0 1px;
+}
+
+.window-btn-minimize::before {
+  content: '';
+  width: 6px;
+  height: 2px;
+  background: var(--win-black);
+  margin-top: 4px;
+}
+
+.window-btn-maximize::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--win-black);
+  border-top-width: 2px;
+}
+
+.window.maximized .window-btn-maximize::before {
+  width: 6px;
+  height: 6px;
+  position: relative;
+}
+
+.window.maximized .window-btn-maximize::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--win-black);
+  border-top-width: 2px;
+  background: var(--win-bg);
+  transform: translate(2px, -10px);
+}
+
+.window-btn-close {
+  margin-left: 2px;
+}
+
+.window-btn-close::before {
+  content: '×';
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--win-black);
+}
+
+/* ==========================================================================
+   Window Content
+   ========================================================================== */
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  background: var(--win-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.window-body {
+  flex: 1;
+  padding: 8px;
+  overflow: auto;
+}
+
+/* Menu Bar */
+.window-menubar {
+  display: flex;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--win-border-darker);
+  box-shadow: 0 1px 0 var(--win-border-light);
+  background: var(--win-bg);
+}
+
+.window-menu-item {
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.window-menu-item:hover {
+  background: var(--win-selection);
+  color: var(--win-selection-text);
+}
+
+/* Status Bar */
+.window-statusbar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 2px 4px;
+  border-top: 1px solid var(--win-border-light);
+  background: var(--win-bg);
+  font-size: 11px;
+}
+
+.window-statusbar-section {
+  padding: 0 8px;
+  border-right: 1px solid var(--win-border-darker);
+  box-shadow: 1px 0 0 var(--win-border-light);
+}
+
+.window-statusbar-section:last-child {
+  border-right: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Resize Handles
+   ========================================================================== */
+
+.resize-handle {
+  position: absolute;
+  z-index: 10;
+}
+
+.resize-handle-n {
+  top: 0;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  cursor: n-resize;
+}
+
+.resize-handle-s {
+  bottom: 0;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  cursor: s-resize;
+}
+
+.resize-handle-e {
+  top: 4px;
+  right: 0;
+  bottom: 4px;
+  width: 4px;
+  cursor: e-resize;
+}
+
+.resize-handle-w {
+  top: 4px;
+  left: 0;
+  bottom: 4px;
+  width: 4px;
+  cursor: w-resize;
+}
+
+.resize-handle-nw {
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: nw-resize;
+}
+
+.resize-handle-ne {
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: ne-resize;
+}
+
+.resize-handle-sw {
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  cursor: sw-resize;
+}
+
+.resize-handle-se {
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  cursor: se-resize;
+}
+
+/* SE corner grip */
+.resize-handle-se::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: 
+    linear-gradient(135deg, 
+      transparent 0%, transparent 30%,
+      var(--win-border-light) 30%, var(--win-border-light) 35%,
+      var(--win-border-darker) 35%, var(--win-border-darker) 40%,
+      transparent 40%, transparent 60%,
+      var(--win-border-light) 60%, var(--win-border-light) 65%,
+      var(--win-border-darker) 65%, var(--win-border-darker) 70%,
+      transparent 70%, transparent 90%,
+      var(--win-border-light) 90%, var(--win-border-light) 95%,
+      var(--win-border-darker) 95%
+    );
+}
+
+/* Disable resize on maximized window */
+.window.maximized .resize-handle {
+  display: none;
+}
