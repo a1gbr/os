@@ -122,6 +122,11 @@ class WindowManager {
     // Focus the new window
     this.focusWindow(id);
 
+    // Call onInit callback if provided
+    if (config.onInit && typeof config.onInit === 'function') {
+      config.onInit(win.querySelector('.window-body'));
+    }
+
     // Emit event
     events.emit(EVENTS.WINDOW_OPEN, { id, title, icon });
 

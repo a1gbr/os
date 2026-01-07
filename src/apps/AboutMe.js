@@ -20,7 +20,8 @@ export const AboutMe = {
       icon: this.icon,
       width: this.width,
       height: this.height,
-      content: this.getContent()
+      content: this.getContent(),
+      onInit: (container) => this.onInit(container)
     };
   },
 
@@ -35,26 +36,41 @@ export const AboutMe = {
           display: flex;
           flex-direction: column;
         }
+        
+        /* Win98 Tab Control */
         .about-tabs {
           display: flex;
-          gap: 0;
-          margin-bottom: -2px;
           position: relative;
-          z-index: 1;
+          padding-left: 2px;
+          margin-bottom: 0;
         }
         .about-tab {
-          padding: 4px 16px;
+          position: relative;
+          padding: 3px 8px 2px 8px;
+          margin-right: 3px;
           background: var(--win-bg);
-          border: 2px solid;
-          border-color: var(--win-border-light) var(--win-border-dark) transparent var(--win-border-light);
+          border: 1px solid;
+          border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
           cursor: pointer;
+          z-index: 0;
         }
         .about-tab.active {
-          background: var(--win-bg);
-          border-bottom-color: var(--win-bg);
-          padding-bottom: 6px;
+          padding-bottom: 4px;
           margin-bottom: -2px;
+          border-bottom: 2px solid var(--win-bg);
+          z-index: 2;
         }
+        /* Dotted focus outline inside active tab */
+        .about-tab.active::after {
+          content: '';
+          position: absolute;
+          top: 2px;
+          left: 4px;
+          right: 4px;
+          bottom: 4px;
+          border: 1px dotted #000;
+        }
+        
         .about-content {
           flex: 1;
           border: 2px solid;
@@ -62,6 +78,8 @@ export const AboutMe = {
           padding: 16px;
           background: var(--win-bg);
           overflow-y: auto;
+          position: relative;
+          z-index: 1;
         }
         .about-header {
           display: flex;
@@ -213,24 +231,22 @@ export const AboutMe = {
           </div>
         </div>
       </div>
-      
-      <script>
-        (function() {
-          const tabs = document.querySelectorAll('.about-tab');
-          const panels = document.querySelectorAll('.tab-panel');
-          
-          tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-              tabs.forEach(t => t.classList.remove('active'));
-              panels.forEach(p => p.classList.remove('active'));
-              
-              tab.classList.add('active');
-              document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-            });
-          });
-        })();
-      </script>
     `;
+  },
+
+  onInit(container) {
+    const tabs = container.querySelectorAll('.about-tab');
+    const panels = container.querySelectorAll('.tab-panel');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        
+        tab.classList.add('active');
+        container.querySelector('#tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
   }
 };
 
