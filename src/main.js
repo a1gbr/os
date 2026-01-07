@@ -3,33 +3,31 @@
  */
 
 // Styles
-import './styles/system.css';
-import './styles/windows.css';
-import './styles/desktop.css';
-import './styles/taskbar.css';
 import './styles/boot.css';
+import './styles/desktop.css';
+import './styles/system.css';
+import './styles/taskbar.css';
+import './styles/windows.css';
 
 // Core
 import { events, EVENTS } from './core/events.js';
 import { storage } from './core/storage.js';
-import { sounds } from './core/sounds.js';
 
 // UI
-import { windowManager } from './ui/WindowManager.js';
 import { desktop } from './ui/Desktop.js';
-import { taskbar } from './ui/Taskbar.js';
 import { startMenu } from './ui/StartMenu.js';
+import { taskbar } from './ui/Taskbar.js';
+import { windowManager } from './ui/WindowManager.js';
 
 // Boot
-import { splash } from './boot/splash.js';
 import { bootSequence } from './boot/bootSequence.js';
 
 // Apps
-import { appRegistry } from './apps/registry.js';
 import { AboutMe } from './apps/AboutMe.js';
-import { Projects } from './apps/Projects.js';
-import { Terminal } from './apps/Terminal.js';
 import { Notepad } from './apps/Notepad.js';
+import { Projects } from './apps/Projects.js';
+import { appRegistry } from './apps/registry.js';
+import { Terminal } from './apps/Terminal.js';
 
 /**
  * System - Main controller
@@ -43,13 +41,11 @@ class System {
    * Initialize the system
    */
   async init() {
-    // Initialize splash screen
-    splash.init();
     bootSequence.init();
 
-    // Set up splash callback
-    splash.setOnStart(async () => {
-      await this.boot();
+    // Start immediately (no splash)
+    requestAnimationFrame(() => {
+      void this.boot();
     });
   }
 
