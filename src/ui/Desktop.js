@@ -2,7 +2,6 @@
  * Desktop Manager - Handles desktop icons and background
  */
 import { events, EVENTS } from '../core/events.js';
-import { storage, STORAGE_KEYS } from '../core/storage.js';
 
 class Desktop {
   constructor() {
@@ -61,7 +60,9 @@ class Desktop {
     iconEl.tabIndex = 0;
 
     iconEl.innerHTML = `
-      <img class="desktop-icon-image" src="${icon}" alt="${title}" draggable="false">
+      <div class="desktop-icon-wrapper">
+        <img class="desktop-icon-image" src="${icon}" alt="${title}" draggable="false">
+      </div>
       <span class="desktop-icon-label">${title}</span>
     `;
 

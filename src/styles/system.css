@@ -10,40 +10,58 @@
   --win-bg-light: #dfdfdf;
   --win-white: #ffffff;
   --win-black: #000000;
-  
+
   /* 3D Border Colors */
   --win-border-light: #ffffff;
   --win-border-dark: #404040;
   --win-border-darker: #808080;
-  
+
   /* Active/Title Bar Colors */
   --win-active-title: linear-gradient(90deg, #000080 0%, #1084d0 100%);
   --win-inactive-title: linear-gradient(90deg, #808080 0%, #b5b5b5 100%);
   --win-active-title-text: #ffffff;
   --win-inactive-title-text: #c0c0c0;
-  
+
   /* Desktop */
   --win-desktop: #008080;
-  
+
   /* Selection */
   --win-selection: #000080;
   --win-selection-text: #ffffff;
-  
+
   /* Button States */
   --win-button-face: #c0c0c0;
   --win-button-highlight: #ffffff;
   --win-button-shadow: #808080;
   --win-button-dark-shadow: #404040;
-  
+
   /* Typography */
   --win-font: 'Pixelated MS Sans Serif', 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
   --win-font-size: 11px;
-  
+
   /* Sizing */
   --titlebar-height: 18px;
   --taskbar-height: 28px;
   --icon-size: 32px;
   --grid-size: 75px;
+  --scrollbar-size: 16px;
+
+  /* 98.js Compatible Names (aliases for cross-compatibility) */
+  --ActiveTitle: var(--win-selection);
+  --Background: var(--win-desktop);
+  --ButtonFace: var(--win-bg);
+  --ButtonShadow: var(--win-border-darker);
+  --ButtonHilight: var(--win-border-light);
+  --ButtonDkShadow: var(--win-border-dark);
+  --Hilight: var(--win-selection);
+  --HilightText: var(--win-selection-text);
+  --Window: var(--win-white);
+  --WindowText: var(--win-black);
+  --GrayText: #808080;
+  --TitleText: var(--win-active-title-text);
+
+  /* Checker pattern for scrollbar tracks and disabled backgrounds */
+  --checker: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGUlEQVQIW2P8DwQMDAwM/w8ePMjAeODAAQYANZYD/tSMlT0AAAAASUVORK5CYII=");
 }
 
 /* Reset */
@@ -159,12 +177,16 @@ html, body {
    ========================================================================== */
 
 ::-webkit-scrollbar {
-  width: 16px;
-  height: 16px;
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
 }
 
 ::-webkit-scrollbar-track {
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="1" height="1" fill="%23c0c0c0"/><rect x="1" y="1" width="1" height="1" fill="%23c0c0c0"/><rect x="1" width="1" height="1" fill="%23ffffff"/><rect y="1" width="1" height="1" fill="%23ffffff"/></svg>');
+  background: var(--checker);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--ButtonFace);
 }
 
 ::-webkit-scrollbar-thumb {

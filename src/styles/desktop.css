@@ -8,7 +8,8 @@
   left: 0;
   width: 100%;
   height: calc(100% - var(--taskbar-height));
-  background: var(--win-desktop);
+  background: url('/public/assets/wallpaper/clouds.jpg') no-repeat center center;
+  background-size: cover;
   overflow: hidden;
   z-index: 1;
 }
@@ -38,39 +39,62 @@
   padding: 4px;
   cursor: pointer;
   text-align: center;
+  outline: none;
 }
 
-.desktop-icon:hover .desktop-icon-label,
-.desktop-icon:focus .desktop-icon-label {
-  background: var(--win-selection);
-  color: var(--win-selection-text);
-}
-
-.desktop-icon.selected .desktop-icon-image {
-  filter: brightness(0.7) sepia(1) hue-rotate(180deg) saturate(3);
-}
-
-.desktop-icon.selected .desktop-icon-label {
-  background: var(--win-selection);
-  color: var(--win-selection-text);
+/* Icon Wrapper - just holds the image */
+.desktop-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
 }
 
 .desktop-icon-image {
   width: var(--icon-size);
   height: var(--icon-size);
   image-rendering: pixelated;
-  margin-bottom: 4px;
   pointer-events: none;
 }
 
+/* Icon Label Styling */
 .desktop-icon-label {
   font-size: 11px;
   color: var(--win-white);
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-  padding: 1px 2px;
-  max-width: 100%;
+  text-shadow:
+    1px 0 1px rgba(0, 0, 0, 0.9),
+    -1px 0 1px rgba(0, 0, 0, 0.9),
+    0 1px 1px rgba(0, 0, 0, 0.9),
+    0 -1px 1px rgba(0, 0, 0, 0.9),
+    1px 1px 1px rgba(0, 0, 0, 0.9);
+  padding: 2px 4px;
+  max-width: 110%;
   word-wrap: break-word;
   line-height: 1.2;
+  margin-top: 2px;
+}
+
+/* Hover State */
+.desktop-icon:hover .desktop-icon-label,
+.desktop-icon:focus .desktop-icon-label {
+  background: var(--Hilight);
+  color: var(--HilightText);
+  text-shadow: none;
+}
+
+/* Selected State */
+.desktop-icon.selected .desktop-icon-image,
+.desktop-icon:focus .desktop-icon-image {
+  /* Win98 style: Icon darkens slightly/tints when selected */
+  filter: brightness(0.7) sepia(1) hue-rotate(180deg) saturate(1.5);
+}
+
+.desktop-icon.selected .desktop-icon-label,
+.desktop-icon:focus .desktop-icon-label {
+  background: var(--Hilight);
+  color: var(--HilightText);
+  text-shadow: none;
 }
 
 /* ==========================================================================
