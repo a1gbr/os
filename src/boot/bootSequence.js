@@ -8,6 +8,35 @@ class BootSequence {
     this.container = null;
     this.stages = ['bios', 'logo'];
     this.currentStage = 0;
+
+    // Flag animation configuration
+    this.flagConfig = {
+      width: 400,
+      height: 220,
+      // Trail colors - Win98 palette (Red, Green, Blue, Yellow cycle - no purple)
+      trailColors: ['#F36A23', '#7FBA00', '#00A4EF', '#FFB900'],
+      trailWidth: 180,
+      minPixelSize: 2,
+      maxPixelSize: 8,
+      // Main Flag (Right) configuration - Win98 Colors
+      flagX: 180,
+      flagSize: 120,
+      flagColors: {
+        tl: '#F36A23', // Red-Orange
+        tr: '#7FBA00', // Green
+        bl: '#00A4EF', // Blue
+        br: '#FFB900'  // Yellow
+      },
+      // Wave settings
+      waveAmplitude: 10,
+      waveFrequency: 0.09,
+      waveSpeed: 0.12,
+      // Pixel/texture settings
+      basePixelSize: 6,
+      pixelGap: 1,
+      phase: 0,
+      animationId: null
+    };
   }
 
   /**
@@ -28,35 +57,9 @@ class BootSequence {
         <div class="boot-bios-text" id="bios-text"></div>
       </div>
 
-      <!-- Windows Logo Screen -->
+      <!-- Logo Screen with Waving Flag -->
       <div class="boot-logo" id="boot-logo">
-        <svg class="boot-windows-logo" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="red-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#FF6B6B"/>
-              <stop offset="100%" style="stop-color:#EE0000"/>
-            </linearGradient>
-            <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#69FF69"/>
-              <stop offset="100%" style="stop-color:#00CC00"/>
-            </linearGradient>
-            <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#6B6BFF"/>
-              <stop offset="100%" style="stop-color:#0000EE"/>
-            </linearGradient>
-            <linearGradient id="yellow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#FFFF6B"/>
-              <stop offset="100%" style="stop-color:#DDDD00"/>
-            </linearGradient>
-          </defs>
-          <g transform="rotate(-10 44 44)">
-            <rect x="4" y="4" width="36" height="36" rx="2" fill="url(#red-grad)"/>
-            <rect x="48" y="4" width="36" height="36" rx="2" fill="url(#green-grad)"/>
-            <rect x="4" y="48" width="36" height="36" rx="2" fill="url(#blue-grad)"/>
-            <rect x="48" y="48" width="36" height="36" rx="2" fill="url(#yellow-grad)"/>
-          </g>
-        </svg>
-        <div class="boot-windows-text">a1gbr98</div>
+        <canvas id="boot-flag" width="400" height="220"></canvas>
         <div class="boot-progress-container">
           <div class="boot-progress-bar" id="boot-progress"></div>
         </div>
@@ -117,25 +120,172 @@ class BootSequence {
   }
 
   /**
-   * Show Windows logo screen
+   * Show logo screen with waving flag
    */
   async showLogo() {
     const logo = document.getElementById('boot-logo');
     const progress = document.getElementById('boot-progress');
-    
+
     logo.classList.add('active');
 
-    // Animate progress bar
+    // Start flag animation
+    this.startFlagAnimation();
+
+    // Animate progress bar with mini-squares
     const blocks = 10;
     for (let i = 0; i < blocks; i++) {
       const block = document.createElement('div');
       block.className = 'boot-progress-block';
+      // Create 6 mini-squares (2x3 grid)
+      for (let j = 0; j < 6; j++) {
+        const square = document.createElement('div');
+        square.className = 'boot-progress-square';
+        block.appendChild(square);
+      }
       progress.appendChild(block);
       await this.delay(150);
     }
 
     await this.delay(500);
+
+    // Stop flag animation before hiding
+    this.stopFlagAnimation();
     logo.classList.remove('active');
+  }
+
+  /**
+   * Start the waving flag animation
+   */
+  startFlagAnimation() {
+    const canvas = document.getElementById('boot-flag');
+    const ctx = canvas.getContext('2d');
+
+    const animate = () => {
+      this.drawWavingFlag(ctx);
+      this.flagConfig.phase += this.flagConfig.waveSpeed;
+      this.flagConfig.animationId = requestAnimationFrame(animate);
+    };
+    animate();
+  }
+
+  /**
+   * Draw the waving flag with unified opacity gradient (5% left -> 100% right)
+   */
+  drawWavingFlag(ctx) {
+    const {
+      width, height, trailColors, trailWidth,
+      minPixelSize, maxPixelSize,
+      flagX, flagSize, flagColors,
+      waveAmplitude, waveFrequency, phase,
+      basePixelSize, pixelGap
+    } = this.flagConfig;
+
+    ctx.clearRect(0, 0, width, height + 40);
+
+    // Calculate total flag width for global opacity gradient
+    const totalFlagWidth = trailWidth + flagSize;
+    const flagStartX = flagX - trailWidth; // Leftmost edge of entire flag
+    const flagEndX = flagX + flagSize;     // Rightmost edge
+    
+    // Center offset to position flag in middle of canvas
+    const centerOffsetX = (width - totalFlagWidth) / 2;
+    const centerOffsetY = 15; // Vertical centering adjustment
+
+    // Global opacity function: 5% at left edge, 100% at right edge
+    const getGlobalOpacity = (x) => {
+      const normalizedX = (x - flagStartX - centerOffsetX) / totalFlagWidth;
+      return 0.05 + 0.95 * Math.max(0, Math.min(1, normalizedX));
+    };
+
+    // Wave function for cloth effect
+    const getWaveY = (x, y) => {
+      const rowPhase = y * 0.018;
+      const wave = Math.sin((x * waveFrequency) + phase + rowPhase) * waveAmplitude;
+      return y + wave;
+    };
+
+    // Vertical bounds (centered)
+    const baseY = (height - flagSize) / 2 + centerOffsetY;
+
+    // --- 1. Draw TRAIL (Left Side) ---
+    const numColumns = 28;
+    const colStep = trailWidth / numColumns;
+
+    for (let c = 0; c < numColumns; c++) {
+      const cx = centerOffsetX + c * colStep;
+      const t = (c + 1) / numColumns;
+      
+      // Size: Small at left, Big at right
+      const size = minPixelSize + (maxPixelSize - minPixelSize) * t;
+      
+      // Global opacity based on X position
+      const opacity = getGlobalOpacity(cx);
+      
+      // Select color cyclically from W98 palette
+      const colorHex = trailColors[c % trailColors.length];
+      
+      const yStep = size + pixelGap;
+
+      for (let y = baseY; y <= baseY + flagSize; y += yStep) {
+        const renderY = getWaveY(cx, y);
+        ctx.fillStyle = this.adjustColorWithOpacity(colorHex, 1, opacity);
+        ctx.fillRect(cx, renderY, size, size);
+      }
+    }
+
+    // --- 2. Draw MAIN FLAG (Right Side) ---
+    const flagStep = basePixelSize;
+    const flagRenderX = centerOffsetX + trailWidth - flagStep; // Overlap slightly
+    
+    const isChecker = (x, y) => (Math.floor(x / flagStep) + Math.floor(y / flagStep)) % 2 === 0;
+
+    for (let fx = 0; fx < flagSize; fx += flagStep) {
+      for (let fy = 0; fy < flagSize; fy += flagStep) {
+        
+        // Determine quadrant color (Win98 style)
+        const isRight = fx >= flagSize / 2;
+        const isBottom = fy >= flagSize / 2;
+        
+        let hex;
+        if (!isRight && !isBottom) hex = flagColors.tl; // Red
+        if (isRight && !isBottom) hex = flagColors.tr;  // Green
+        if (!isRight && isBottom) hex = flagColors.bl;  // Blue
+        if (isRight && isBottom) hex = flagColors.br;   // Yellow
+        
+        const brightness = isChecker(fx, fy) ? 1.0 : 0.88;
+        
+        const absoluteX = flagRenderX + fx;
+        const absoluteY = baseY + fy;
+        
+        // Global opacity gradient
+        const opacity = getGlobalOpacity(absoluteX);
+        
+        const renderY = getWaveY(absoluteX, absoluteY);
+        ctx.fillStyle = this.adjustColorWithOpacity(hex, brightness, opacity);
+        ctx.fillRect(absoluteX, renderY, flagStep, flagStep);
+      }
+    }
+  }
+
+  /**
+   * Adjust color brightness and opacity
+   */
+  adjustColorWithOpacity(hex, brightness, opacity) {
+    const r = Math.min(255, Math.floor(parseInt(hex.slice(1, 3), 16) * brightness));
+    const g = Math.min(255, Math.floor(parseInt(hex.slice(3, 5), 16) * brightness));
+    const b = Math.min(255, Math.floor(parseInt(hex.slice(5, 7), 16) * brightness));
+    return `rgba(${r},${g},${b},${opacity})`;
+  }
+
+  /**
+   * Stop the flag animation
+   */
+  stopFlagAnimation() {
+    if (this.flagConfig.animationId) {
+      cancelAnimationFrame(this.flagConfig.animationId);
+      this.flagConfig.animationId = null;
+    }
+    this.flagConfig.phase = 0;
   }
 
   /**

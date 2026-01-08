@@ -1,10 +1,15 @@
 /**
  * Projects App - Showcase projects in a file explorer style
  */
-import { folder as folderIconData, folderSmall, urlShortcut as urlIconData, urlShortcutSmall } from '../icons/win98Icons.js';
+import {
+  folder as folderIconData,
+  folderSmall,
+  urlShortcut as urlIconData,
+  urlShortcutSmall,
+} from "../icons/win98Icons.js";
 
 export const Projects = {
-  title: 'My Projects',
+  title: "My Projects",
   icon: folderIconData,
   width: 600,
   height: 450,
@@ -16,8 +21,8 @@ export const Projects = {
       width: this.width,
       height: this.height,
       content: this.getContent(),
-      menubar: ['File', 'Edit', 'View', 'Help'],
-      onInit: (container) => this.onInit(container)
+      menubar: ["File", "Edit", "View", "Help"],
+      onInit: (container) => this.onInit(container),
     };
   },
 
@@ -267,13 +272,12 @@ export const Projects = {
           background: rgba(0, 0, 0, 0.2);
           z-index: 10001;
           display: none;
-          align-items: center;
-          justify-content: center;
         }
         .props-overlay.visible {
-          display: flex;
+          display: block;
         }
         .props-dialog {
+          position: fixed;
           background: var(--win-bg);
           border: 2px solid;
           border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
@@ -292,7 +296,7 @@ export const Projects = {
           height: 18px;
           padding: 2px 3px;
           background: linear-gradient(90deg, #000080, #1084d0);
-          cursor: default;
+          cursor: move;
           flex-shrink: 0;
         }
         .props-titlebar-icon {
@@ -621,132 +625,174 @@ export const Projects = {
   onInit(container) {
     // File system structure
     const fileSystem = {
-      '/': [
+      "/": [
         {
-          name: 'TickTag',
-          type: 'folder',
-          desc: 'TickTag Project - Online ticket sales platform with distributed architecture.',
+          name: "College Projects",
+          type: "folder",
+          desc: "Various projects completed during college.",
           tech: [],
-          created: '2024-10-15',
-          modified: '2024-12-20'
+          created: "2023-02-10",
+          modified: "2024-05-22",
         },
         {
-          name: 'a1gbr.com.url',
-          type: 'url',
-          desc: 'This portfolio! A Windows 98-inspired website built with vanilla JavaScript and Claude Opus 4.5.',
-          tech: ['JavaScript', 'CSS', 'Vite'],
-          link: '#',
-          created: '2025-01-05',
-          modified: '2025-01-07'
-        },
-        {
-          name: 'HE110_W0R1D.url',
-          type: 'url',
-          desc: 'Educational web content aggregator for aspiring tech professionals. Curated programming resources for beginners.',
-          tech: ['HTML', 'CSS', 'JavaScript'],
-          link: 'https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2022-1-e1-proj-web-t1-he110_w0r1d',
-          created: '2022-03-01',
-          modified: '2022-06-15'
-        },
-        {
-          name: 'OpenLibrary.url',
-          type: 'url',
-          desc: 'Business process application for library workflow automation. Built on Sydle One BPM platform.',
-          tech: ['Sydle One', 'BPM', 'Workflow'],
-          link: 'https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2022-2-e2-proj-bpm-t4-openlibrary',
-          created: '2022-08-01',
-          modified: '2022-12-10'
-        },
-        {
-          name: 'CLINAST.url',
-          type: 'url',
-          desc: 'Clinic management and control application built with Flutter/Dart. Developed in partnership with Clialmed.',
-          tech: ['Flutter', 'Dart', 'Multiplatform'],
-          link: 'https://github.com/a1gbr/clinast',
-          created: '2024-03-01',
-          modified: '2024-11-15'
+          name: "Landing Pages",
+          type: "folder",
+          desc: "Collection of landing pages created for various projects and events.",
+          tech: [],
+          created: "2023-06-01",
+          modified: "2024-04-12",
         }
       ],
-      '/TickTag/': [
+      "/College Projects/": [
         {
-          name: 'Backend.url',
-          type: 'url',
-          desc: 'Java/Spring Boot backend for TickTag - an online ticket sales platform with scalable architecture.',
-          tech: ['Java', 'Spring Boot', 'PostgreSQL', 'Docker'],
-          link: 'https://github.com/sales-victor/TickTag',
-          created: '2024-10-17',
-          modified: '2024-12-15'
+          name: "TickTag",
+          type: "folder",
+          desc: "TickTag Project - Online ticket sales platform with distributed architecture.",
+          tech: [],
+          created: "2024-10-15",
+          modified: "2024-12-20",
         },
         {
-          name: 'Frontend.url',
-          type: 'url',
-          desc: 'React frontend for TickTag ticket sales platform. Responsive design for desktop and mobile.',
-          tech: ['React', 'JavaScript', 'CSS', 'Docker'],
-          link: 'https://github.com/ThiagoVini13/ticktag-frontend',
-          created: '2024-10-17',
-          modified: '2024-12-18'
+          name: "HE110_W0R1D.url",
+          type: "url",
+          desc: "Educational web content aggregator for aspiring tech professionals. Curated programming resources for beginners.",
+          tech: ["HTML", "CSS", "JavaScript"],
+          link: "https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2022-1-e1-proj-web-t1-he110_w0r1d",
+          created: "2022-03-01",
+          modified: "2022-06-15",
         },
         {
-          name: 'Mobile.url',
-          type: 'url',
-          desc: 'Cross-platform mobile app for TickTag using Expo/React Native with TypeScript.',
-          tech: ['React Native', 'Expo', 'TypeScript'],
-          link: 'https://github.com/sales-victor/ticktag-mobile',
-          created: '2024-11-20',
-          modified: '2024-12-10'
+          name: "OpenLibrary.url",
+          type: "url",
+          desc: "Business process application for library workflow automation. Built on Sydle One BPM platform.",
+          tech: ["Sydle One", "BPM", "Workflow"],
+          link: "https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2022-2-e2-proj-bpm-t4-openlibrary",
+          created: "2022-08-01",
+          modified: "2022-12-10",
         },
         {
-          name: 'Documentation.url',
-          type: 'url',
-          desc: 'Full documentation and project specs for TickTag - distributed ticket sales system with load balancing.',
-          tech: ['GitHub'],
-          link: 'https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-2-pe6-t3-g11-venda-de-tickets',
-          created: '2024-10-15',
-          modified: '2024-12-20'
-        }
-      ]
+          name: "CLINAST.url",
+          type: "url",
+          desc: "Clinic management and control application built with Flutter/Dart. Developed in partnership with Clialmed.",
+          tech: ["Flutter", "Dart", "Multiplatform"],
+          link: "https://github.com/a1gbr/clinast",
+          created: "2024-03-01",
+          modified: "2024-11-15",
+        },
+      ],
+      "/Landing Pages/": [
+        {
+          name: "Luana Machado Psicóloga.url",
+          type: "url",
+          desc: "Landing page for psychologist Luana Machado. Showcases services and contact info.",
+          tech: ["HTML", "CSS", "JavaScript", "Astro", "GitHub Pages"],
+          link: "https://a1gbr.github.io/luana-psi/",
+          created: "2023-05-10",
+          modified: "2024-02-20",
+        },
+        {
+          link: "https://desserts-landing-page.vercel.app/",
+          name: "Delicia Arte Doceria Artesanal.url",
+          type: "url",
+          desc: "Responsive landing page for a dessert shop. Features menu, testimonials, and contact form.",
+          tech: ["HTML", "CSS", "JavaScript", "Next.js", "Vercel"],
+          created: "2023-07-15",
+          modified: "2024-03-10",
+        },
+      ],
+      "/College Projects/TickTag/": [
+        {
+          name: "Backend.url",
+          type: "url",
+          desc: "Java/Spring Boot backend for TickTag - an online ticket sales platform with scalable architecture.",
+          tech: ["Java", "Spring Boot", "PostgreSQL", "Docker"],
+          link: "https://github.com/sales-victor/TickTag",
+          created: "2024-10-17",
+          modified: "2024-12-15",
+        },
+        {
+          name: "Frontend.url",
+          type: "url",
+          desc: "React frontend for TickTag ticket sales platform. Responsive design for desktop and mobile.",
+          tech: ["React", "JavaScript", "CSS", "Docker"],
+          link: "https://github.com/ThiagoVini13/ticktag-frontend",
+          created: "2024-10-17",
+          modified: "2024-12-18",
+        },
+        {
+          name: "Mobile.url",
+          type: "url",
+          desc: "Cross-platform mobile app for TickTag using Expo/React Native with TypeScript.",
+          tech: ["React Native", "Expo", "TypeScript"],
+          link: "https://github.com/sales-victor/ticktag-mobile",
+          created: "2024-11-20",
+          modified: "2024-12-10",
+        },
+        {
+          name: "Documentation.url",
+          type: "url",
+          desc: "Full documentation and project specs for TickTag - distributed ticket sales system with load balancing.",
+          tech: ["GitHub"],
+          link: "https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-2-pe6-t3-g11-venda-de-tickets",
+          created: "2024-10-15",
+          modified: "2024-12-20",
+        },
+      ],
     };
 
-    let currentPath = '/';
-    let history = ['/'];
+    let currentPath = "/";
+    let history = ["/"];
     let historyIndex = 0;
     let selectedItem = null;
 
-    const grid = container.querySelector('#project-grid');
-    const addressPath = container.querySelector('#address-path');
-    const statusText = container.querySelector('#status-text');
-    const contextMenu = container.querySelector('#context-menu');
-    const btnBack = container.querySelector('#btn-back');
-    const btnForward = container.querySelector('#btn-forward');
-    const btnUp = container.querySelector('#btn-up');
-    const btnProperties = container.querySelector('#btn-properties');
+    const grid = container.querySelector("#project-grid");
+    const addressPath = container.querySelector("#address-path");
+    const statusText = container.querySelector("#status-text");
+    const contextMenu = container.querySelector("#context-menu");
+    const btnBack = container.querySelector("#btn-back");
+    const btnForward = container.querySelector("#btn-forward");
+    const btnUp = container.querySelector("#btn-up");
+    const btnProperties = container.querySelector("#btn-properties");
 
     // Properties dialog elements
-    const propsOverlay = container.querySelector('#props-overlay');
-    const propsTitleIcon = container.querySelector('#props-title-icon');
-    const propsTitleText = container.querySelector('#props-title-text');
-    const propsClose = container.querySelector('#props-close');
-    const propsTabs = container.querySelector('#props-tabs');
-    const propsContent = container.querySelector('#props-content');
-    const propsOk = container.querySelector('#props-ok');
-    const propsCancel = container.querySelector('#props-cancel');
+    const propsOverlay = container.querySelector("#props-overlay");
+    const propsDialog = container.querySelector(".props-dialog");
+    const propsTitlebar = container.querySelector(".props-titlebar");
+    const propsTitleIcon = container.querySelector("#props-title-icon");
+    const propsTitleText = container.querySelector("#props-title-text");
+    const propsClose = container.querySelector("#props-close");
+    const propsTabs = container.querySelector("#props-tabs");
+    const propsContent = container.querySelector("#props-content");
+    const propsOk = container.querySelector("#props-ok");
+    const propsCancel = container.querySelector("#props-cancel");
+
+    // Drag state for properties dialog
+    let propsDragState = null;
 
     // Icon SVGs - extracted from data URIs for inline use
-    const folderIcon = decodeURIComponent(folderIconData.replace('data:image/svg+xml,', ''));
-    const urlIcon = decodeURIComponent(urlIconData.replace('data:image/svg+xml,', ''));
-    const folderIconSmall = decodeURIComponent(folderSmall.replace('data:image/svg+xml,', ''));
-    const urlIconSmall = decodeURIComponent(urlShortcutSmall.replace('data:image/svg+xml,', ''));
+    const folderIcon = decodeURIComponent(
+      folderIconData.replace("data:image/svg+xml,", "")
+    );
+    const urlIcon = decodeURIComponent(
+      urlIconData.replace("data:image/svg+xml,", "")
+    );
+    const folderIconSmall = decodeURIComponent(
+      folderSmall.replace("data:image/svg+xml,", "")
+    );
+    const urlIconSmall = decodeURIComponent(
+      urlShortcutSmall.replace("data:image/svg+xml,", "")
+    );
 
     function getFileType(item) {
-      if (item.type === 'folder') return 'File Folder';
-      if (item.type === 'url') return 'Internet Shortcut';
-      if (item.type === 'txt') return 'Text Document';
-      if (item.type === 'exe') return 'Application';
-      return 'File';
+      if (item.type === "folder") return "File Folder";
+      if (item.type === "url") return "Internet Shortcut";
+      if (item.type === "txt") return "Text Document";
+      if (item.type === "exe") return "Application";
+      return "File";
     }
 
     function getFileIcon(item, small = false) {
-      if (item.type === 'folder') return small ? folderIconSmall : folderIcon;
+      if (item.type === "folder") return small ? folderIconSmall : folderIcon;
       return small ? urlIconSmall : urlIcon;
     }
 
@@ -758,77 +804,110 @@ export const Projects = {
 
       // Set title
       propsTitleIcon.innerHTML = getFileIcon(data, true);
-      propsTitleText.textContent = data.name + ' Properties';
+      propsTitleText.textContent = data.name + " Properties";
 
       // Build tabs based on type
-      let tabs = ['General'];
-      if (data.type === 'url') {
-        tabs.push('Web Document');
+      let tabs = ["General"];
+      if (data.type === "url") {
+        tabs.push("Web Document");
       }
 
       // Render tabs
-      propsTabs.innerHTML = tabs.map((tab, i) => `
-        <div class="props-tab ${i === 0 ? 'active' : ''}" data-tab="${i}">${tab}</div>
-      `).join('');
+      propsTabs.innerHTML = tabs
+        .map(
+          (tab, i) => `
+        <div class="props-tab ${
+          i === 0 ? "active" : ""
+        }" data-tab="${i}">${tab}</div>
+      `
+        )
+        .join("");
 
       // Render content based on type
       let generalContent = `
         <div class="props-header">
           <div class="props-header-icon">${getFileIcon(data)}</div>
-          <input type="text" class="props-header-name" value="${data.name}" readonly>
+          <input type="text" class="props-header-name" value="${
+            data.name
+          }" readonly>
         </div>
 
         <div class="props-row">
           <span class="props-label">Type:</span>
           <span class="props-value">${getFileType(data)}</span>
         </div>
-        ${data.type === 'url' ? `
+        ${
+          data.type === "url"
+            ? `
         <div class="props-row">
           <span class="props-label">URL:</span>
           <span class="props-value"><a href="${data.link}" target="_blank">${data.link}</a></span>
         </div>
-        ` : ''}
+        `
+            : ""
+        }
         <div class="props-row">
           <span class="props-label">Location:</span>
-          <span class="props-value">C:\\Projects${currentPath.replace(/\//g, '\\')}</span>
+          <span class="props-value">C:\\Projects${currentPath.replace(
+            /\//g,
+            "\\"
+          )}</span>
         </div>
 
         <div class="props-divider"></div>
 
-        ${data.created ? `
+        ${
+          data.created
+            ? `
         <div class="props-row">
           <span class="props-label">Created:</span>
           <span class="props-value">${data.created}</span>
         </div>
-        ` : ''}
-        ${data.modified ? `
+        `
+            : ""
+        }
+        ${
+          data.modified
+            ? `
         <div class="props-row">
           <span class="props-label">Modified:</span>
           <span class="props-value">${data.modified}</span>
         </div>
-        ` : ''}
+        `
+            : ""
+        }
 
-        ${data.tech && data.tech.length > 0 ? `
+        ${
+          data.tech && data.tech.length > 0
+            ? `
         <div class="props-divider"></div>
         <div class="props-row">
           <span class="props-label">Tech Stack:</span>
         </div>
         <div class="props-tech">
-          ${data.tech.map(t => `<span class="props-tech-tag">${t}</span>`).join('')}
+          ${data.tech
+            .map((t) => `<span class="props-tech-tag">${t}</span>`)
+            .join("")}
         </div>
-        ` : ''}
+        `
+            : ""
+        }
 
-        ${data.desc ? `
+        ${
+          data.desc
+            ? `
         <div class="props-divider"></div>
         <div class="props-row">
           <span class="props-label">Description:</span>
         </div>
         <div class="props-desc">${data.desc}</div>
-        ` : ''}
+        `
+            : ""
+        }
       `;
 
-      let webDocContent = '';
-      if (data.type === 'url') {
+      let webDocContent = "";
+      if (data.type === "url") {
         webDocContent = `
           <div class="props-row">
             <span class="props-label">URL:</span>
@@ -856,40 +935,56 @@ export const Projects = {
       // Combine panels
       propsContent.innerHTML = `
         <div class="props-tab-panel active" data-panel="0">${generalContent}</div>
-        ${data.type === 'url' ? `<div class="props-tab-panel" data-panel="1">${webDocContent}</div>` : ''}
+        ${
+          data.type === "url"
+            ? `<div class="props-tab-panel" data-panel="1">${webDocContent}</div>`
+            : ""
+        }
       `;
 
       // Tab switching
-      propsTabs.querySelectorAll('.props-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          propsTabs.querySelectorAll('.props-tab').forEach(t => t.classList.remove('active'));
-          propsContent.querySelectorAll('.props-tab-panel').forEach(p => p.classList.remove('active'));
-          tab.classList.add('active');
-          propsContent.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('active');
+      propsTabs.querySelectorAll(".props-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          propsTabs
+            .querySelectorAll(".props-tab")
+            .forEach((t) => t.classList.remove("active"));
+          propsContent
+            .querySelectorAll(".props-tab-panel")
+            .forEach((p) => p.classList.remove("active"));
+          tab.classList.add("active");
+          propsContent
+            .querySelector(`[data-panel="${tab.dataset.tab}"]`)
+            .classList.add("active");
         });
       });
 
-      // Show dialog
-      propsOverlay.classList.add('visible');
+      // Center and show dialog
+      const dialogWidth = 380;
+      const dialogHeight = propsDialog.offsetHeight || 400;
+      propsDialog.style.left = `${(window.innerWidth - dialogWidth) / 2}px`;
+      propsDialog.style.top = `${(window.innerHeight - dialogHeight) / 2}px`;
+      propsOverlay.classList.add("visible");
     }
 
     function hideProperties() {
-      propsOverlay.classList.remove('visible');
+      propsOverlay.classList.remove("visible");
     }
 
     function renderFolder(path) {
       const items = fileSystem[path] || [];
-      grid.innerHTML = '';
+      grid.innerHTML = "";
 
       items.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'project-item';
+        const div = document.createElement("div");
+        div.className = "project-item";
         div.dataset.index = index;
         div.dataset.type = item.type;
         div.dataset.name = item.name;
 
         div.innerHTML = `
-          <div class="project-icon">${item.type === 'folder' ? folderIcon : urlIcon}</div>
+          <div class="project-icon">${
+            item.type === "folder" ? folderIcon : urlIcon
+          }</div>
           <div class="project-name">${item.name}</div>
         `;
 
@@ -897,17 +992,20 @@ export const Projects = {
       });
 
       // Update address bar
-      addressPath.textContent = 'C:\\\\Projects' + path.replace(/\//g, '\\\\');
-      statusText.textContent = items.length + ' object(s)';
+      addressPath.textContent = "C:\\\\Projects" + path.replace(/\//g, "\\\\");
+      statusText.textContent = items.length + " object(s)";
 
       // Update navigation buttons
       updateNavButtons();
     }
 
     function updateNavButtons() {
-      btnBack.classList.toggle('disabled', historyIndex <= 0);
-      btnForward.classList.toggle('disabled', historyIndex >= history.length - 1);
-      btnUp.classList.toggle('disabled', currentPath === '/');
+      btnBack.classList.toggle("disabled", historyIndex <= 0);
+      btnForward.classList.toggle(
+        "disabled",
+        historyIndex >= history.length - 1
+      );
+      btnUp.classList.toggle("disabled", currentPath === "/");
     }
 
     function navigateTo(path) {
@@ -942,10 +1040,10 @@ export const Projects = {
     }
 
     function goUp() {
-      if (currentPath !== '/') {
-        const parts = currentPath.split('/').filter(p => p);
+      if (currentPath !== "/") {
+        const parts = currentPath.split("/").filter((p) => p);
         parts.pop();
-        const parentPath = '/' + (parts.length ? parts.join('/') + '/' : '');
+        const parentPath = "/" + (parts.length ? parts.join("/") + "/" : "");
         navigateTo(parentPath);
       }
     }
@@ -954,16 +1052,16 @@ export const Projects = {
       const items = fileSystem[currentPath];
       const data = items[item.dataset.index];
 
-      if (data.type === 'folder') {
-        const newPath = currentPath + data.name + '/';
+      if (data.type === "folder") {
+        const newPath = currentPath + data.name + "/";
         navigateTo(newPath);
-      } else if (data.link && data.link !== '#') {
-        window.open(data.link, '_blank');
+      } else if (data.link && data.link !== "#") {
+        window.open(data.link, "_blank");
       }
     }
 
     function hideContextMenu() {
-      contextMenu.classList.remove('visible');
+      contextMenu.classList.remove("visible");
     }
 
     function showContextMenu(x, y, item) {
@@ -974,64 +1072,68 @@ export const Projects = {
       const exploreBtn = contextMenu.querySelector('[data-action="explore"]');
       const propsBtn = contextMenu.querySelector('[data-action="properties"]');
 
-      if (data?.type === 'folder') {
-        openBtn.textContent = 'Open';
-        exploreBtn.style.display = 'block';
+      if (data?.type === "folder") {
+        openBtn.textContent = "Open";
+        exploreBtn.style.display = "block";
       } else {
-        openBtn.textContent = 'Open';
-        exploreBtn.style.display = 'none';
+        openBtn.textContent = "Open";
+        exploreBtn.style.display = "none";
       }
 
       // Enable/disable properties based on selection
       if (item) {
-        propsBtn.classList.remove('disabled');
+        propsBtn.classList.remove("disabled");
       } else {
-        propsBtn.classList.add('disabled');
+        propsBtn.classList.add("disabled");
       }
 
-      contextMenu.style.left = x + 'px';
-      contextMenu.style.top = y + 'px';
-      contextMenu.classList.add('visible');
+      contextMenu.style.left = x + "px";
+      contextMenu.style.top = y + "px";
+      contextMenu.classList.add("visible");
 
       const rect = contextMenu.getBoundingClientRect();
       if (rect.right > window.innerWidth) {
-        contextMenu.style.left = (x - rect.width) + 'px';
+        contextMenu.style.left = x - rect.width + "px";
       }
       if (rect.bottom > window.innerHeight) {
-        contextMenu.style.top = (y - rect.height) + 'px';
+        contextMenu.style.top = y - rect.height + "px";
       }
     }
 
     // Event listeners
-    grid.addEventListener('click', (e) => {
-      const item = e.target.closest('.project-item');
+    grid.addEventListener("click", (e) => {
+      const item = e.target.closest(".project-item");
       hideContextMenu();
 
-      grid.querySelectorAll('.project-item').forEach(i => i.classList.remove('selected'));
+      grid
+        .querySelectorAll(".project-item")
+        .forEach((i) => i.classList.remove("selected"));
 
       if (item) {
-        item.classList.add('selected');
+        item.classList.add("selected");
         selectedItem = item;
       } else {
         selectedItem = null;
       }
     });
 
-    grid.addEventListener('dblclick', (e) => {
-      const item = e.target.closest('.project-item');
+    grid.addEventListener("dblclick", (e) => {
+      const item = e.target.closest(".project-item");
       if (item) {
         openItem(item);
       }
     });
 
-    grid.addEventListener('contextmenu', (e) => {
+    grid.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      const item = e.target.closest('.project-item');
+      const item = e.target.closest(".project-item");
 
-      grid.querySelectorAll('.project-item').forEach(i => i.classList.remove('selected'));
+      grid
+        .querySelectorAll(".project-item")
+        .forEach((i) => i.classList.remove("selected"));
 
       if (item) {
-        item.classList.add('selected');
+        item.classList.add("selected");
         selectedItem = item;
         showContextMenu(e.clientX, e.clientY, item);
       } else {
@@ -1040,67 +1142,92 @@ export const Projects = {
       }
     });
 
-    contextMenu.addEventListener('click', (e) => {
-      const menuItem = e.target.closest('.context-menu-item');
-      if (!menuItem || menuItem.classList.contains('disabled')) return;
+    contextMenu.addEventListener("click", (e) => {
+      const menuItem = e.target.closest(".context-menu-item");
+      if (!menuItem || menuItem.classList.contains("disabled")) return;
 
       const action = menuItem.dataset.action;
 
-      if (action === 'open' && selectedItem) {
+      if (action === "open" && selectedItem) {
         openItem(selectedItem);
-      } else if (action === 'explore' && selectedItem) {
+      } else if (action === "explore" && selectedItem) {
         const items = fileSystem[currentPath];
         const data = items[selectedItem.dataset.index];
-        if (data.type === 'folder') {
-          const newPath = currentPath + data.name + '/';
+        if (data.type === "folder") {
+          const newPath = currentPath + data.name + "/";
           navigateTo(newPath);
         }
-      } else if (action === 'properties' && selectedItem) {
+      } else if (action === "properties" && selectedItem) {
         showProperties(selectedItem);
       }
 
       hideContextMenu();
     });
 
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!contextMenu.contains(e.target)) {
         hideContextMenu();
       }
     });
 
     // Toolbar buttons
-    btnBack.addEventListener('click', () => {
-      if (!btnBack.classList.contains('disabled')) goBack();
+    btnBack.addEventListener("click", () => {
+      if (!btnBack.classList.contains("disabled")) goBack();
     });
 
-    btnForward.addEventListener('click', () => {
-      if (!btnForward.classList.contains('disabled')) goForward();
+    btnForward.addEventListener("click", () => {
+      if (!btnForward.classList.contains("disabled")) goForward();
     });
 
-    btnUp.addEventListener('click', () => {
-      if (!btnUp.classList.contains('disabled')) goUp();
+    btnUp.addEventListener("click", () => {
+      if (!btnUp.classList.contains("disabled")) goUp();
     });
 
-    btnProperties.addEventListener('click', () => {
+    btnProperties.addEventListener("click", () => {
       if (selectedItem) {
         showProperties(selectedItem);
       }
     });
 
     // Properties dialog buttons
-    propsClose.addEventListener('click', hideProperties);
-    propsOk.addEventListener('click', hideProperties);
-    propsCancel.addEventListener('click', hideProperties);
+    propsClose.addEventListener("click", hideProperties);
+    propsOk.addEventListener("click", hideProperties);
+    propsCancel.addEventListener("click", hideProperties);
 
-    propsOverlay.addEventListener('click', (e) => {
+    // Properties dialog dragging
+    propsTitlebar.addEventListener("mousedown", (e) => {
+      if (e.target.closest(".props-titlebar-close")) return;
+      propsDragState = {
+        startX: e.clientX,
+        startY: e.clientY,
+        startLeft: propsDialog.offsetLeft,
+        startTop: propsDialog.offsetTop,
+      };
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!propsDragState) return;
+      const newLeft =
+        propsDragState.startLeft + (e.clientX - propsDragState.startX);
+      const newTop =
+        propsDragState.startTop + (e.clientY - propsDragState.startY);
+      propsDialog.style.left = `${Math.max(0, newLeft)}px`;
+      propsDialog.style.top = `${Math.max(0, newTop)}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+      propsDragState = null;
+    });
+
+    propsOverlay.addEventListener("click", (e) => {
       if (e.target === propsOverlay) {
         hideProperties();
       }
     });
 
     // Initial render
-    renderFolder('/');
-  }
+    renderFolder("/");
+  },
 };
 
 export default Projects;

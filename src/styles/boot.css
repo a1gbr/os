@@ -68,10 +68,8 @@
   display: flex;
 }
 
-.boot-windows-logo {
-  width: 320px;
-  height: auto;
-  margin-bottom: 40px;
+#boot-flag {
+  margin-bottom: 32px;
 }
 
 .boot-windows-text {
@@ -85,24 +83,32 @@
 
 .boot-progress-container {
   width: 200px;
-  height: 20px;
+  height: 22px;
   background: #000;
-  border: 1px solid #808080;
-  padding: 2px;
+  border: 2px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  padding: 3px 4px;
+  display: flex;
+  align-items: center;
 }
 
 .boot-progress-bar {
   height: 100%;
-  background: #000080;
-  width: 0%;
   display: flex;
-  gap: 2px;
+  gap: 3px;
 }
 
 .boot-progress-block {
-  width: 18px;
+  width: 13px;
   height: 100%;
-  background: linear-gradient(180deg, #4169e1 0%, #000080 50%, #4169e1 100%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+}
+
+.boot-progress-square {
+  background: #0000aa;
 }
 
 /* ==========================================================================

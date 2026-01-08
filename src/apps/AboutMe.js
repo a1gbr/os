@@ -218,6 +218,7 @@ export const AboutMe = {
                 <span class="about-tag">Node.js</span>
                 <span class="about-tag">Next.js</span>
                 <span class="about-tag">Vite</span>
+                <span class="about-tag">Astro</span>
               </div>
             </div>
             
