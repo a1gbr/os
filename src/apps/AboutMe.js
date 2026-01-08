@@ -125,6 +125,11 @@ export const AboutMe = {
           flex-wrap: wrap;
           gap: 4px;
         }
+        .about-note {
+          font-size: 10px;
+          color: #333;
+          margin-top: 8px;
+        }
         .about-tag {
           background: #000080;
           color: white;
@@ -161,55 +166,78 @@ export const AboutMe = {
               <div class="about-logo">A1</div>
               <div class="about-title">
                 <h2>a1gbr</h2>
-                <p>Full Stack Developer</p>
-                <p>Version 1.0.0 (Human Build)</p>
+                <p>Wannabe Developer | ESL Teacher</p>
+                <p>Version 0.0.1 (Alpha)</p>
               </div>
             </div>
             
             <div class="about-section">
               <h3>About</h3>
-              <p>Welcome to my Windows 98-inspired portfolio! I'm a developer who loves building creative web experiences and solving complex problems.</p>
-              <p style="margin-top: 8px;">This portfolio is built with vanilla JavaScript, no frameworks - just like the good old days.</p>
+              <p>Welcome to my W98-inspired website! I'm an information systems graduate, coder and a linguistic enthusiast.</p>
+              <p style="margin-top: 8px;">This portfolio is built with vanilla JavaScript and Claude Opus 4.5</p>
             </div>
 
             <div class="about-section">
               <h3>System Specifications</h3>
-              <p>🖥️ Primary IDE: VS Code</p>
+              <p>🖥️ IDEs: VS Code | IntelliJ</p>
               <p>☕ Fuel: Coffee</p>
-              <p>🎮 Hobby: Retro Computing</p>
+              <p>🎮 Hobby: Gaming | Running </p>
             </div>
           </div>
           
           <div class="tab-panel" id="tab-skills">
             <div class="about-section">
-              <h3>Languages</h3>
+            <h3>Professional Stack</h3>
               <div class="about-list">
+                <span class="about-tag">Angular</span>
+                <span class="about-tag">Spring</span>
+                <span class="about-tag">PostgreSQL</span>
+                <span class="about-tag">Docker</span>
+              </div>
+            </div>
+            <div class="about-section">
+              <h3>Known Languages</h3>
+              <div class="about-list">
+                <span class="about-tag">Java</span>
+                <span class="about-tag">SQL</span>
+                <span class="about-tag">C#</span>
                 <span class="about-tag">JavaScript</span>
                 <span class="about-tag">TypeScript</span>
-                <span class="about-tag">Python</span>
+                <span class="about-tag">Dart</span>
                 <span class="about-tag">HTML/CSS</span>
-                <span class="about-tag">SQL</span>
+                <span class="about-tag">Python</span>
+
+                
               </div>
             </div>
             
             <div class="about-section">
-              <h3>Frameworks & Tools</h3>
+              <h3>Frameworks</h3>
               <div class="about-list">
+                <span class="about-tag">Angular</span>
+                <span class="about-tag">Flutter</span>
+                <span class="about-tag">ASP.NET</span>
+                <span class="about-tag">Spring</span>
                 <span class="about-tag">React</span>
+                <span class="about-tag">jQuery</span>
                 <span class="about-tag">Node.js</span>
                 <span class="about-tag">Next.js</span>
                 <span class="about-tag">Vite</span>
-                <span class="about-tag">Git</span>
               </div>
             </div>
             
             <div class="about-section">
-              <h3>Interests</h3>
+              <h3>Tools</h3>
               <div class="about-list">
-                <span class="about-tag">Web Dev</span>
-                <span class="about-tag">UI/UX</span>
-                <span class="about-tag">Open Source</span>
-                <span class="about-tag">Retro Tech</span>
+                <span class="about-tag">Git</span>
+                <span class="about-tag">GitHub</span>
+                <span class="about-tag">MySQL</span>
+                <span class="about-tag">AWS EC2</span>
+                <span class="about-tag">Heroku</span>
+                <span class="about-tag">Vercel</span>
+                <span class="about-tag">Cloudflare CI/CD</span>
+                <span class="about-tag">Postman</span>
+                <span class="about-tag">Figma</span>
               </div>
             </div>
           </div>
@@ -220,13 +248,13 @@ export const AboutMe = {
               <div class="about-links">
                 <p><a href="https://github.com/a1gbr" target="_blank">📁 GitHub</a></p>
                 <p><a href="https://linkedin.com/in/a1gbr" target="_blank">💼 LinkedIn</a></p>
-                <p><a href="mailto:hello@a1gbr.com">📧 Email</a></p>
+                <p><a href="mailto:contato@a1gbr.com">📧 Email</a></p>
               </div>
             </div>
             
             <div class="about-section">
               <h3>Availability</h3>
-              <p>Currently open to new opportunities and collaborations.</p>
+              <p>Currently seeking new opportunities and collaborations.</p>
               <p style="margin-top: 8px;">Feel free to reach out!</p>
             </div>
           </div>
