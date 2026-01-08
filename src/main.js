@@ -29,6 +29,9 @@ import { Projects } from './apps/Projects.js';
 import { appRegistry } from './apps/registry.js';
 import { Terminal } from './apps/Terminal.js';
 
+// Icons
+import { textFile, programsFolder, github, linkedin, shutDown } from './icons/win98Icons.js';
+
 /**
  * System - Main controller
  */
@@ -147,14 +150,7 @@ class System {
     desktop.addIcon({
       id: 'readme',
       title: 'README.txt',
-      icon: 'data:image/svg+xml,' + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-          <rect x="4" y="2" width="24" height="28" fill="#ffffff" stroke="#000" stroke-width="1"/>
-          <line x1="8" y1="8" x2="24" y2="8" stroke="#808080" stroke-width="1"/>
-          <line x1="8" y1="12" x2="24" y2="12" stroke="#808080" stroke-width="1"/>
-          <line x1="8" y1="16" x2="18" y2="16" stroke="#808080" stroke-width="1"/>
-        </svg>
-      `),
+      icon: textFile,
       onOpen: () => appRegistry.launch('notepad', { 
         filename: 'README.txt',
         content: `Welcome to a1gbr.com!
@@ -189,12 +185,7 @@ Built with ❤️ and nostalgia.
     // Programs submenu
     startMenu.addItem({
       title: 'Programs',
-      icon: 'data:image/svg+xml,' + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-          <rect x="2" y="2" width="28" height="28" fill="#ffcc00" stroke="#000" stroke-width="1"/>
-          <rect x="6" y="6" width="20" height="20" fill="#ffdd55"/>
-        </svg>
-      `),
+      icon: programsFolder,
       largeIcon: true,
       submenu: [
         {
@@ -232,24 +223,14 @@ Built with ❤️ and nostalgia.
     startMenu.addItem({
       title: 'GitHub',
       subtitle: 'View my code',
-      icon: 'data:image/svg+xml,' + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <circle cx="8" cy="8" r="7" fill="#000"/>
-          <path d="M8 1C4.13 1 1 4.13 1 8c0 3.1 2 5.7 4.8 6.6.35.07.48-.15.48-.34v-1.2c-1.95.42-2.36-.94-2.36-.94-.32-.8-.78-1.02-.78-1.02-.64-.44.05-.43.05-.43.7.05 1.07.72 1.07.72.63 1.07 1.65.76 2.05.58.06-.45.25-.76.45-.94-1.56-.18-3.2-.78-3.2-3.46 0-.76.27-1.38.72-1.87-.07-.18-.31-.89.07-1.85 0 0 .59-.19 1.93.72.56-.16 1.16-.24 1.76-.24.6 0 1.2.08 1.76.24 1.34-.9 1.93-.72 1.93-.72.38.96.14 1.67.07 1.85.45.49.72 1.11.72 1.87 0 2.69-1.64 3.28-3.2 3.45.25.22.48.65.48 1.3v1.93c0 .19.13.41.49.34C13 13.7 15 11.1 15 8c0-3.87-3.13-7-7-7z" fill="#fff"/>
-        </svg>
-      `),
+      icon: github,
       onClick: () => window.open('https://github.com/a1gbr', '_blank')
     });
 
     startMenu.addItem({
       title: 'LinkedIn',
       subtitle: 'Connect with me',
-      icon: 'data:image/svg+xml,' + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <rect width="16" height="16" fill="#0077b5"/>
-          <path d="M4.5 6H3v6h1.5V6zM3.75 3a.87.87 0 100 1.74.87.87 0 000-1.74zM12 8.5c0-1.1-.9-2-2-2-.74 0-1.38.4-1.73 1V6H6.5v6H8V9.5c0-.55.45-1 1-1s1 .45 1 1V12h1.5V8.5z" fill="#fff"/>
-        </svg>
-      `),
+      icon: linkedin,
       onClick: () => window.open('https://linkedin.com/in/a1gbr', '_blank')
     });
 
@@ -259,12 +240,7 @@ Built with ❤️ and nostalgia.
     // Shut Down
     startMenu.addItem({
       title: 'Shut Down...',
-      icon: 'data:image/svg+xml,' + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <rect x="2" y="2" width="12" height="12" rx="2" fill="#c0c0c0" stroke="#000" stroke-width="1"/>
-          <circle cx="8" cy="8" r="3" fill="#ff0000"/>
-        </svg>
-      `),
+      icon: shutDown,
       onClick: () => this.shutdown()
     });
   }

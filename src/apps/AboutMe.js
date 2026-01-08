@@ -1,16 +1,11 @@
 /**
  * About Me App - Personal information displayed like System Properties
  */
+import { aboutMe as aboutMeIcon } from '../icons/win98Icons.js';
 
 export const AboutMe = {
   title: 'About Me',
-  icon: 'data:image/svg+xml,' + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-      <rect x="2" y="2" width="28" height="28" fill="#c0c0c0" stroke="#000" stroke-width="1"/>
-      <circle cx="16" cy="12" r="6" fill="#000080"/>
-      <ellipse cx="16" cy="28" rx="10" ry="6" fill="#000080"/>
-    </svg>
-  `),
+  icon: aboutMeIcon,
   width: 420,
   height: 380,
   

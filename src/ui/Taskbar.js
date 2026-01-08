@@ -2,6 +2,7 @@
  * Taskbar - Windows 98 style taskbar with start button, window buttons, and system tray
  */
 import { events, EVENTS } from '../core/events.js';
+import { startLogo } from '../icons/win98Icons.js';
 
 class Taskbar {
   constructor() {
@@ -30,12 +31,7 @@ class Taskbar {
     this.container.innerHTML = `
       <button class="start-button" id="start-btn">
         <div class="start-button-logo">
-          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="0" width="7" height="7" fill="#FF0000"/>
-            <rect x="9" y="0" width="7" height="7" fill="#00FF00"/>
-            <rect x="0" y="9" width="7" height="7" fill="#0000FF"/>
-            <rect x="9" y="9" width="7" height="7" fill="#FFFF00"/>
-          </svg>
+          <img src="${startLogo}" alt="" width="16" height="16">
         </div>
         <span>Start</span>
       </button>

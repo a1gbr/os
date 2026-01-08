@@ -1,18 +1,11 @@
 /**
  * Notepad App - Simple text editor
  */
+import { notepad as notepadIcon } from '../icons/win98Icons.js';
 
 export const Notepad = {
   title: 'Notepad',
-  icon: 'data:image/svg+xml,' + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-      <rect x="4" y="2" width="24" height="28" fill="#ffffff" stroke="#000" stroke-width="1"/>
-      <line x1="8" y1="8" x2="24" y2="8" stroke="#000080" stroke-width="1"/>
-      <line x1="8" y1="12" x2="24" y2="12" stroke="#000080" stroke-width="1"/>
-      <line x1="8" y1="16" x2="20" y2="16" stroke="#000080" stroke-width="1"/>
-      <line x1="8" y1="20" x2="22" y2="20" stroke="#000080" stroke-width="1"/>
-    </svg>
-  `),
+  icon: notepadIcon,
   width: 500,
   height: 350,
 

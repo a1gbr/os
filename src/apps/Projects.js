@@ -1,15 +1,11 @@
 /**
  * Projects App - Showcase projects in a file explorer style
  */
+import { folder as folderIconData, folderSmall, urlShortcut as urlIconData, urlShortcutSmall } from '../icons/win98Icons.js';
 
 export const Projects = {
   title: 'My Projects',
-  icon: 'data:image/svg+xml,' + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-      <path d="M2 6 L14 6 L16 2 L30 2 L30 28 L2 28 Z" fill="#ffcc00" stroke="#000" stroke-width="1"/>
-      <rect x="4" y="8" width="24" height="18" fill="#ffdd55"/>
-    </svg>
-  `),
+  icon: folderIconData,
   width: 600,
   height: 450,
 
@@ -735,32 +731,11 @@ export const Projects = {
     const propsOk = container.querySelector('#props-ok');
     const propsCancel = container.querySelector('#props-cancel');
 
-    // Icon SVGs
-    const folderIcon = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 6 L14 6 L16 2 L30 2 L30 28 L2 28 Z" fill="#ffcc00" stroke="#000" stroke-width="1"/>
-      <rect x="4" y="8" width="24" height="18" fill="#ffdd55"/>
-    </svg>`;
-
-    const urlIcon = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 2 L6 30 L26 30 L26 8 L20 2 Z" fill="#fff" stroke="#000" stroke-width="1"/>
-      <path d="M20 2 L20 8 L26 8" fill="#c0c0c0" stroke="#000" stroke-width="1"/>
-      <circle cx="16" cy="18" r="7" fill="#0066cc" stroke="#000" stroke-width="0.5"/>
-      <ellipse cx="16" cy="18" rx="3" ry="7" fill="none" stroke="#fff" stroke-width="0.5"/>
-      <line x1="9" y1="18" x2="23" y2="18" stroke="#fff" stroke-width="0.5"/>
-      <line x1="16" y1="11" x2="16" y2="25" stroke="#fff" stroke-width="0.5"/>
-      <path d="M22 24 L28 24 L28 18 L26 20 L22 16 L20 18 L24 22 Z" fill="#fff" stroke="#000" stroke-width="0.5"/>
-    </svg>`;
-
-    const folderIconSmall = `<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1 3 L7 3 L8 1 L15 1 L15 14 L1 14 Z" fill="#ffcc00" stroke="#000" stroke-width="0.5"/>
-      <rect x="2" y="4" width="12" height="9" fill="#ffdd55"/>
-    </svg>`;
-
-    const urlIconSmall = `<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3 1 L3 15 L13 15 L13 4 L10 1 Z" fill="#fff" stroke="#000" stroke-width="0.5"/>
-      <path d="M10 1 L10 4 L13 4" fill="#c0c0c0" stroke="#000" stroke-width="0.5"/>
-      <circle cx="8" cy="9" r="3.5" fill="#0066cc" stroke="#000" stroke-width="0.3"/>
-    </svg>`;
+    // Icon SVGs - extracted from data URIs for inline use
+    const folderIcon = decodeURIComponent(folderIconData.replace('data:image/svg+xml,', ''));
+    const urlIcon = decodeURIComponent(urlIconData.replace('data:image/svg+xml,', ''));
+    const folderIconSmall = decodeURIComponent(folderSmall.replace('data:image/svg+xml,', ''));
+    const urlIconSmall = decodeURIComponent(urlShortcutSmall.replace('data:image/svg+xml,', ''));
 
     function getFileType(item) {
       if (item.type === 'folder') return 'File Folder';

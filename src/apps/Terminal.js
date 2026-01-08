@@ -1,15 +1,11 @@
 /**
  * Terminal App - Command line interface
  */
+import { terminal as terminalIcon } from '../icons/win98Icons.js';
 
 export const Terminal = {
   title: 'Command Prompt',
-  icon: 'data:image/svg+xml,' + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-      <rect x="2" y="2" width="28" height="28" fill="#000000" stroke="#808080" stroke-width="1"/>
-      <text x="4" y="14" fill="#c0c0c0" font-family="monospace" font-size="10">C:\\&gt;_</text>
-    </svg>
-  `),
+  icon: terminalIcon,
   width: 650,
   height: 400,
 
