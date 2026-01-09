@@ -699,6 +699,15 @@ export const Projects = {
           created: "2023-07-15",
           modified: "2024-03-10",
         },
+        {
+          link: "https://a1gbr.github.io/brenda-odonto/",
+          name: "Dra. Brenda Costa Odonto.url",
+          type: "url",
+          desc: "Landing page for dentist Brenda Costa. Showcases services and contact info.",
+          tech: ["HTML", "Tailwind", "TypeScript", "Next.js", "GitHub Pages"],
+          created: "2023-08-20",
+          modified: "2024-01-15",
+        },
       ],
       "/College Projects/TickTag/": [
         {
