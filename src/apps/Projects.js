@@ -175,9 +175,18 @@ export const Projects = {
         .project-item:hover {
           background: #e8e8e8;
         }
+        .project-item.focused {
+          border: 1px dotted #000;
+        }
+        .project-item.focused:not(.selected) .project-name {
+          text-decoration: underline;
+        }
         .project-item.selected {
           background: #000080;
           color: white;
+        }
+        .project-item.selected.focused {
+          border: 1px dotted #fff;
         }
         .project-icon {
           width: 32px;
@@ -187,9 +196,11 @@ export const Projects = {
           align-items: center;
           justify-content: center;
         }
+        .project-icon img,
         .project-icon svg {
           width: 32px;
           height: 32px;
+          pointer-events: none;
         }
         .project-name {
           font-size: 11px;
@@ -298,12 +309,18 @@ export const Projects = {
           background: linear-gradient(90deg, #000080, #1084d0);
           cursor: move;
           flex-shrink: 0;
+          /* Ensure titlebar is tall enough for touch on mobile */
+          min-height: 24px;
+          /* Prevent touch callout/context menu on long press */
+          -webkit-touch-callout: none;
         }
         .props-titlebar-icon {
           width: 16px;
           height: 16px;
+          margin-left: 2px;
           margin-right: 4px;
         }
+        .props-titlebar-icon img,
         .props-titlebar-icon svg {
           width: 16px;
           height: 16px;
@@ -400,6 +417,7 @@ export const Projects = {
           height: 32px;
           flex-shrink: 0;
         }
+        .props-header-icon img,
         .props-header-icon svg {
           width: 32px;
           height: 32px;
@@ -753,6 +771,7 @@ export const Projects = {
     let history = ["/"];
     let historyIndex = 0;
     let selectedItem = null;
+    let focusedItem = null;
 
     const grid = container.querySelector("#project-grid");
     const addressPath = container.querySelector("#address-path");
@@ -778,19 +797,19 @@ export const Projects = {
     // Drag state for properties dialog
     let propsDragState = null;
 
-    // Icon SVGs - extracted from data URIs for inline use
-    const folderIcon = decodeURIComponent(
-      folderIconData.replace("data:image/svg+xml,", "")
-    );
-    const urlIcon = decodeURIComponent(
-      urlIconData.replace("data:image/svg+xml,", "")
-    );
-    const folderIconSmall = decodeURIComponent(
-      folderSmall.replace("data:image/svg+xml,", "")
-    );
-    const urlIconSmall = decodeURIComponent(
-      urlShortcutSmall.replace("data:image/svg+xml,", "")
-    );
+    // Debounce flag to prevent double-click timing issues
+    let isNavigating = false;
+    let lastDblClickTime = 0;
+
+    // Icon helpers - create img tags from icon paths/data URIs
+    function createIconImg(iconSrc, size = 32) {
+      return `<img src="${iconSrc}" width="${size}" height="${size}" style="image-rendering: pixelated;" alt="">`;
+    }
+
+    const folderIcon = createIconImg(folderIconData, 32);
+    const urlIcon = createIconImg(urlIconData, 32);
+    const folderIconSmall = createIconImg(folderSmall, 16);
+    const urlIconSmall = createIconImg(urlShortcutSmall, 16);
 
     function getFileType(item) {
       if (item.type === "folder") return "File Folder";
@@ -1006,6 +1025,15 @@ export const Projects = {
 
       // Update navigation buttons
       updateNavButtons();
+
+      // Set focus (dotted border) on first item without selecting it
+      const firstItem = grid.querySelector(".project-item");
+      if (firstItem) {
+        focusedItem = firstItem;
+        firstItem.classList.add("focused");
+      } else {
+        focusedItem = null;
+      }
     }
 
     function updateNavButtons() {
@@ -1026,6 +1054,7 @@ export const Projects = {
         historyIndex = history.length - 1;
         currentPath = path;
         selectedItem = null;
+        focusedItem = null;
         renderFolder(path);
       }
     }
@@ -1035,6 +1064,7 @@ export const Projects = {
         historyIndex--;
         currentPath = history[historyIndex];
         selectedItem = null;
+        focusedItem = null;
         renderFolder(currentPath);
       }
     }
@@ -1044,6 +1074,7 @@ export const Projects = {
         historyIndex++;
         currentPath = history[historyIndex];
         selectedItem = null;
+        focusedItem = null;
         renderFolder(currentPath);
       }
     }
@@ -1058,14 +1089,29 @@ export const Projects = {
     }
 
     function openItem(item) {
+      // Prevent double-firing due to timing issues
+      if (isNavigating) return;
+      
       const items = fileSystem[currentPath];
-      const data = items[item.dataset.index];
+      const index = parseInt(item.dataset.index, 10);
+      const data = items?.[index];
 
-      if (data.type === "folder") {
+      if (!data) return;
+
+      // Verify the item name matches what we expect (extra safety)
+      if (item.dataset.name !== data.name) return;
+
+      // Use dataset.type for immediate check, data for actual values
+      if (item.dataset.type === "folder" && data.type === "folder") {
+        isNavigating = true;
         const newPath = currentPath + data.name + "/";
         navigateTo(newPath);
-      } else if (data.link && data.link !== "#") {
+        // Reset flag after navigation completes
+        setTimeout(() => { isNavigating = false; }, 100);
+      } else if (item.dataset.type === "url" && data.type === "url" && data.link && data.link !== "#") {
+        isNavigating = true;
         window.open(data.link, "_blank");
+        setTimeout(() => { isNavigating = false; }, 100);
       }
     }
 
@@ -1111,24 +1157,40 @@ export const Projects = {
 
     // Event listeners
     grid.addEventListener("click", (e) => {
+      // Ignore clicks that are part of a double-click sequence
+      if (Date.now() - lastDblClickTime < 300) return;
+      
       const item = e.target.closest(".project-item");
       hideContextMenu();
 
+      // Clear previous focus and selection
       grid
         .querySelectorAll(".project-item")
-        .forEach((i) => i.classList.remove("selected"));
+        .forEach((i) => i.classList.remove("selected", "focused"));
 
       if (item) {
-        item.classList.add("selected");
+        // Click sets both focus and selection
+        item.classList.add("selected", "focused");
         selectedItem = item;
+        focusedItem = item;
       } else {
         selectedItem = null;
+        focusedItem = null;
       }
     });
 
     grid.addEventListener("dblclick", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Record double-click time to suppress subsequent click events
+      lastDblClickTime = Date.now();
+      
+      // Ignore if already navigating
+      if (isNavigating) return;
+      
       const item = e.target.closest(".project-item");
-      if (item) {
+      if (item && item.dataset.index !== undefined) {
         openItem(item);
       }
     });
@@ -1139,14 +1201,16 @@ export const Projects = {
 
       grid
         .querySelectorAll(".project-item")
-        .forEach((i) => i.classList.remove("selected"));
+        .forEach((i) => i.classList.remove("selected", "focused"));
 
       if (item) {
-        item.classList.add("selected");
+        item.classList.add("selected", "focused");
         selectedItem = item;
+        focusedItem = item;
         showContextMenu(e.clientX, e.clientY, item);
       } else {
         selectedItem = null;
+        focusedItem = null;
         showContextMenu(e.clientX, e.clientY, null);
       }
     });
@@ -1233,6 +1297,76 @@ export const Projects = {
         hideProperties();
       }
     });
+
+    // Keyboard navigation for grid
+    container.addEventListener("keydown", (e) => {
+      const items = grid.querySelectorAll(".project-item");
+      if (items.length === 0) return;
+
+      const itemsArray = Array.from(items);
+      const currentIndex = focusedItem ? itemsArray.indexOf(focusedItem) : -1;
+
+      // Calculate grid columns for arrow navigation
+      const gridStyle = window.getComputedStyle(grid);
+      const gridTemplateColumns = gridStyle.getPropertyValue("grid-template-columns");
+      const columns = gridTemplateColumns.split(" ").length || 1;
+
+      let newIndex = currentIndex;
+
+      switch (e.key) {
+        case "ArrowRight":
+          e.preventDefault();
+          newIndex = Math.min(currentIndex + 1, itemsArray.length - 1);
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          newIndex = Math.max(currentIndex - 1, 0);
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          newIndex = Math.min(currentIndex + columns, itemsArray.length - 1);
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          newIndex = Math.max(currentIndex - columns, 0);
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (focusedItem) {
+            // Select and open the focused item
+            grid.querySelectorAll(".project-item").forEach((i) => i.classList.remove("selected"));
+            focusedItem.classList.add("selected");
+            selectedItem = focusedItem;
+            openItem(focusedItem);
+          }
+          return;
+        case "Home":
+          e.preventDefault();
+          newIndex = 0;
+          break;
+        case "End":
+          e.preventDefault();
+          newIndex = itemsArray.length - 1;
+          break;
+        default:
+          return;
+      }
+
+      // Move focus to new item (without selecting)
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < itemsArray.length) {
+        items.forEach((i) => i.classList.remove("focused"));
+        const newFocusedItem = itemsArray[newIndex];
+        newFocusedItem.classList.add("focused");
+        focusedItem = newFocusedItem;
+        // Scroll into view if needed
+        newFocusedItem.scrollIntoView({ block: "nearest", inline: "nearest" });
+      }
+    });
+
+    // Make the grid focusable for keyboard events
+    grid.setAttribute("tabindex", "0");
+    grid.style.outline = "none";
 
     // Initial render
     renderFolder("/");
