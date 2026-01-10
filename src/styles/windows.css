@@ -31,6 +31,10 @@
   min-height: 100px;
   pointer-events: auto;
   animation: windowOpen 0.15s ease-out;
+  /* Prevent default touch behaviors during drag */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .window.closing {
@@ -62,10 +66,14 @@
   display: flex;
   align-items: center;
   height: var(--titlebar-height);
-  padding: 2px 3px;
+  padding: 2px 4px;
   background: var(--win-active-title);
   cursor: move;
   flex-shrink: 0;
+  /* Ensure titlebar is tall enough for touch on mobile */
+  min-height: 24px;
+  /* Prevent touch callout/context menu on long press */
+  -webkit-touch-callout: none;
 }
 
 .window.inactive .window-titlebar {
@@ -193,6 +201,10 @@
   flex: 1;
   padding: 8px;
   overflow: auto;
+  /* Allow scrolling inside window content on touch devices */
+  touch-action: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 /* Menu Bar */
@@ -361,4 +373,37 @@
 /* Disable resize on maximized window */
 .window.maximized .resize-handle {
   display: none;
+}
+
+/* ==========================================================================
+   Mobile Touch Enhancements
+   ========================================================================== */
+
+/* Larger touch targets for touch devices */
+@media (pointer: coarse) {
+  /* Larger corner resize handles on mobile */
+  .resize-handle-nw,
+  .resize-handle-ne,
+  .resize-handle-sw,
+  .resize-handle-se {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Slightly larger edge handles */
+  .resize-handle-n,
+  .resize-handle-s {
+    height: 8px;
+  }
+
+  .resize-handle-e,
+  .resize-handle-w {
+    width: 8px;
+  }
+
+  /* Larger window control buttons */
+  .window-btn {
+    min-width: 28px;
+    min-height: 24px;
+  }
 }

@@ -14,8 +14,8 @@ class WindowManager {
     this.resizeState = null;
 
     // Bind event handlers
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.handlePointerMove = this.handlePointerMove.bind(this);
+    this.handlePointerUp = this.handlePointerUp.bind(this);
   }
 
   /**
@@ -24,9 +24,10 @@ class WindowManager {
   init() {
     this.container = document.getElementById('window-container');
     
-    // Global mouse events for dragging/resizing
-    document.addEventListener('mousemove', this.handleMouseMove);
-    document.addEventListener('mouseup', this.handleMouseUp);
+    // Global pointer events for dragging/resizing (supports mouse + touch)
+    document.addEventListener('pointermove', this.handlePointerMove);
+    document.addEventListener('pointerup', this.handlePointerUp);
+    document.addEventListener('pointercancel', this.handlePointerUp);
 
     // Listen for app launch events
     events.on(EVENTS.APP_LAUNCH, ({ id, config }) => {
@@ -172,15 +173,24 @@ class WindowManager {
     const btnMaximize = win.querySelector('.window-btn-maximize');
 
     // Focus on click
-    win.addEventListener('mousedown', () => this.focusWindow(id));
+    win.addEventListener('pointerdown', () => this.focusWindow(id));
 
     // Dragging
-    titlebar.addEventListener('mousedown', (e) => {
+    titlebar.addEventListener('pointerdown', (e) => {
+      // Only handle primary pointer (first finger/mouse button)
+      if (!e.isPrimary) return;
       if (e.target.closest('.window-controls')) return;
       if (this.windows.get(id).maximized) return;
 
+      // Prevent default touch behaviors (scrolling, zooming)
+      e.preventDefault();
+
+      // Capture pointer to ensure we get all events even if pointer moves outside element
+      titlebar.setPointerCapture(e.pointerId);
+
       this.dragState = {
         id,
+        pointerId: e.pointerId,
         startX: e.clientX,
         startY: e.clientY,
         startLeft: win.offsetLeft,
@@ -202,8 +212,15 @@ class WindowManager {
     // Resize handles
     const handles = win.querySelectorAll('.resize-handle');
     handles.forEach(handle => {
-      handle.addEventListener('mousedown', (e) => {
+      handle.addEventListener('pointerdown', (e) => {
+        // Only handle primary pointer
+        if (!e.isPrimary) return;
         e.stopPropagation();
+        e.preventDefault();
+
+        // Capture pointer for reliable event delivery
+        handle.setPointerCapture(e.pointerId);
+
         const direction = handle.className.split('resize-handle-')[1];
         this.startResize(id, direction, e);
       });
@@ -217,6 +234,7 @@ class WindowManager {
     const win = this.windows.get(id).element;
     this.resizeState = {
       id,
+      pointerId: e.pointerId,
       direction,
       startX: e.clientX,
       startY: e.clientY,
@@ -228,24 +246,30 @@ class WindowManager {
   }
 
   /**
-   * Handle mouse move (dragging/resizing)
+   * Handle pointer move (dragging/resizing)
    */
-  handleMouseMove(e) {
+  handlePointerMove(e) {
     if (this.dragState) {
+      // Verify pointer ID matches to handle multi-touch correctly
+      if (this.dragState.pointerId !== e.pointerId) return;
+
       const { id, startX, startY, startLeft, startTop } = this.dragState;
       const win = this.windows.get(id).element;
-      
+
       const newLeft = startLeft + (e.clientX - startX);
       const newTop = startTop + (e.clientY - startY);
-      
+
       win.style.left = `${Math.max(0, newLeft)}px`;
       win.style.top = `${Math.max(0, newTop)}px`;
     }
 
     if (this.resizeState) {
+      // Verify pointer ID matches to handle multi-touch correctly
+      if (this.resizeState.pointerId !== e.pointerId) return;
+
       const { id, direction, startX, startY, startWidth, startHeight, startLeft, startTop } = this.resizeState;
       const win = this.windows.get(id).element;
-      
+
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
       const minWidth = 200;
@@ -286,11 +310,16 @@ class WindowManager {
   }
 
   /**
-   * Handle mouse up (stop dragging/resizing)
+   * Handle pointer up (stop dragging/resizing)
    */
-  handleMouseUp() {
-    this.dragState = null;
-    this.resizeState = null;
+  handlePointerUp(e) {
+    // Only clear state if the correct pointer was released
+    if (this.dragState && this.dragState.pointerId === e.pointerId) {
+      this.dragState = null;
+    }
+    if (this.resizeState && this.resizeState.pointerId === e.pointerId) {
+      this.resizeState = null;
+    }
   }
 
   /**
