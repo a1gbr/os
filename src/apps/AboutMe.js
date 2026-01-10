@@ -42,7 +42,7 @@ export const AboutMe = {
         .about-tab {
           position: relative;
           padding: 3px 8px 2px 8px;
-          margin-right: 3px;
+          margin-right: 2px;
           background: var(--win-bg);
           border: 1.5px solid;
           border-bottom: none;
@@ -207,7 +207,7 @@ export const AboutMe = {
             </div>
             
             <div class="about-section">
-              <h3>Frameworks</h3>
+              <h3>Frameworks and Libraries</h3>
               <div class="about-list">
                 <span class="about-tag">Angular</span>
                 <span class="about-tag">Flutter</span>
