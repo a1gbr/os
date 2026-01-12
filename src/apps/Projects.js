@@ -711,7 +711,7 @@ export const Projects = {
           type: "url",
           desc: "Gym management system for tracking members, classes, and payments. Built with T3 stack.",
           tech: ["TypeScript", "Next.js", "Tailwind", "Convex", "Clerk Auth", "Vercel"],
-          link: "https://abre.ai/otZa",
+          link: "https://easyfit-git-feature-mobile-ux-a1gbr.vercel.app?_vercel_share=dA56DwbIe0Zv46uEDtKYcUvJNDqr0LJn",
           created: "2024-01-10",
           modified: "2024-04-05"
         }
