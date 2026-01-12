@@ -187,7 +187,6 @@ export const AboutMe = {
                 <span class="about-tag">NextJs</span>
                 <span class="about-tag">Convex</span>
                 <span class="about-tag">Clerk Auth</span>
-                <span class="about-tag">Docker</span>
               </div>
             </div>
             <div class="about-section">
