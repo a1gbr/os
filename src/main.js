@@ -30,7 +30,7 @@ import { appRegistry } from './apps/registry.js';
 import { Terminal } from './apps/Terminal.js';
 
 // Icons
-import { textFile, programsFolder, github, linkedin, shutDown } from './icons/win98Icons.js';
+import { github, linkedin, programsFolder, shutDown, textFile } from './icons/win98Icons.js';
 
 /**
  * System - Main controller
@@ -158,12 +158,12 @@ class System {
 
 Thanks for visiting my portfolio!
 
-This is a Windows 98-inspired portfolio website
-built entirely with vanilla JavaScript.
+Hope you find my work interesting.
+Use the translation tools in your browser if needed.
 
 QUICK START:
 - Double-click icons to open apps
-- Click Start menu for more options
+- Click Start menu for more options and socials.
 - Try the Terminal for a CLI experience
 - Drag windows by their title bars
 
@@ -171,7 +171,7 @@ TIPS:
 - Type 'help' in Terminal for commands
 - Type 'secret' for a surprise!
 
-Built with ❤️ and nostalgia.
+Enjoy exploring!
 
 - a1gbr`
       })

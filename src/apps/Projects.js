@@ -659,7 +659,14 @@ export const Projects = {
           tech: [],
           created: "2023-06-01",
           modified: "2024-04-12",
-        }
+        },
+        {
+          name: "Web Apps",
+          type: "folder",
+          desc: "Collection of web applications created for various projects and events.",
+          tech: [],
+          created: "2023-09-15",
+          modified: "2024-05-30",}
       ],
       "/College Projects/": [
         {
@@ -698,6 +705,18 @@ export const Projects = {
           modified: "2024-11-15",
         },
       ],
+      "/Web Apps/": [
+        {
+          name: "EasyFit.url",
+          type: "url",
+          desc: "Gym management system for tracking members, classes, and payments. Built with T3 stack.",
+          tech: ["TypeScript", "Next.js", "Tailwind", "Convex", "Clerk Auth", "Vercel"],
+          link: "https://abre.ai/otZa",
+          created: "2024-01-10",
+          modified: "2024-04-05"
+        }
+      ],
+
       "/Landing Pages/": [
         {
           name: "Luana Machado Psicóloga.url",

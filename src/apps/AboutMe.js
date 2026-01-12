@@ -7,7 +7,7 @@ export const AboutMe = {
   title: 'About Me',
   icon: aboutMeIcon,
   width: 420,
-  height: 380,
+  height: 394,
   
   getConfig() {
     return {
@@ -85,8 +85,8 @@ export const AboutMe = {
           border-bottom: 1px solid var(--win-border-darker);
         }
         .about-logo {
-          width: 64px;
-          height: 64px;
+          width: 56px;
+          height: 56px;
           background: linear-gradient(135deg, #000080 0%, #1084d0 100%);
           display: flex;
           align-items: center;
@@ -168,14 +168,14 @@ export const AboutMe = {
             
             <div class="about-section">
               <h3>About</h3>
-              <p>Welcome to my W98-inspired website! I'm an information systems graduate, coder and a linguistic enthusiast.</p>
-              <p style="margin-top: 8px;">This portfolio is built with vanilla JavaScript and Claude Opus 4.5</p>
+              <p>Welcome to my Windows 98 inspired app! I'm an information systems graduate, programmer and a linguistic enthusiast.</p>
+              <p style="margin-top: 8px;">I design and develop valueable software solutions for small businesses, service providers and events.</p>
+              <p style="margin-top: 8px;">This portfolio is a work in progress, showcasing my skills and projects.</p>
             </div>
 
             <div class="about-section">
               <h3>System Specifications</h3>
-              <p>🖥️ IDEs: VS Code | IntelliJ</p>
-              <p>☕ Fuel: Coffee</p>
+              <p>☕ Fuel: Coffee | Codex Tokens</p>
               <p>🎮 Hobby: Gaming | Running </p>
             </div>
           </div>
@@ -184,9 +184,9 @@ export const AboutMe = {
             <div class="about-section">
             <h3>Professional Stack</h3>
               <div class="about-list">
-                <span class="about-tag">Angular</span>
-                <span class="about-tag">Spring</span>
-                <span class="about-tag">PostgreSQL</span>
+                <span class="about-tag">NextJs</span>
+                <span class="about-tag">Convex</span>
+                <span class="about-tag">Clerk Auth</span>
                 <span class="about-tag">Docker</span>
               </div>
             </div>
@@ -196,13 +196,10 @@ export const AboutMe = {
                 <span class="about-tag">Java</span>
                 <span class="about-tag">SQL</span>
                 <span class="about-tag">C#</span>
-                <span class="about-tag">JavaScript</span>
                 <span class="about-tag">TypeScript</span>
                 <span class="about-tag">Dart</span>
                 <span class="about-tag">HTML/CSS</span>
                 <span class="about-tag">Python</span>
-
-                
               </div>
             </div>
             
@@ -211,12 +208,9 @@ export const AboutMe = {
               <div class="about-list">
                 <span class="about-tag">Angular</span>
                 <span class="about-tag">Flutter</span>
-                <span class="about-tag">ASP.NET</span>
                 <span class="about-tag">Spring</span>
                 <span class="about-tag">React</span>
-                <span class="about-tag">jQuery</span>
                 <span class="about-tag">Node.js</span>
-                <span class="about-tag">Next.js</span>
                 <span class="about-tag">Vite</span>
                 <span class="about-tag">Astro</span>
               </div>
@@ -229,11 +223,12 @@ export const AboutMe = {
                 <span class="about-tag">GitHub</span>
                 <span class="about-tag">MySQL</span>
                 <span class="about-tag">AWS EC2</span>
-                <span class="about-tag">Heroku</span>
                 <span class="about-tag">Vercel</span>
-                <span class="about-tag">Cloudflare CI/CD</span>
+                <span class="about-tag">Cloudflare</span>
                 <span class="about-tag">Postman</span>
                 <span class="about-tag">Figma</span>
+                <span class="about-tag">Docker</span>
+                <span class="about-tag">Wordpress</span>
               </div>
             </div>
           </div>
@@ -251,6 +246,7 @@ export const AboutMe = {
             <div class="about-section">
               <h3>Availability</h3>
               <p>Currently seeking new opportunities and collaborations.</p>
+              <p style="margin-top: 8px;">I'm not an expert in anything, matter of fact I'm actually just learning.</p>
               <p style="margin-top: 8px;">Feel free to reach out!</p>
             </div>
           </div>
