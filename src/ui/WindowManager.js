@@ -175,7 +175,7 @@ class WindowManager {
     // Focus on click
     win.addEventListener('pointerdown', () => this.focusWindow(id));
 
-    // Dragging
+    // Dragging - use document-level capture for Safari compatibility
     titlebar.addEventListener('pointerdown', (e) => {
       // Only handle primary pointer (first finger/mouse button)
       if (!e.isPrimary) return;
@@ -184,9 +184,23 @@ class WindowManager {
 
       // Prevent default touch behaviors (scrolling, zooming)
       e.preventDefault();
+      e.stopPropagation();
 
-      // Capture pointer to ensure we get all events even if pointer moves outside element
-      titlebar.setPointerCapture(e.pointerId);
+      // Safari fix: Use document-level pointer capture instead of element-level
+      // This ensures pointer events are captured even with Safari's strict touch handling
+      try {
+        document.body.setPointerCapture(e.pointerId);
+      } catch (err) {
+        // Fallback: some browsers may not support setPointerCapture on body
+        try {
+          titlebar.setPointerCapture(e.pointerId);
+        } catch (err2) {
+          // Continue without pointer capture - drag will still work but may be less reliable
+        }
+      }
+
+      // Add visual feedback during drag
+      win.classList.add('dragging');
 
       this.dragState = {
         id,
@@ -194,7 +208,8 @@ class WindowManager {
         startX: e.clientX,
         startY: e.clientY,
         startLeft: win.offsetLeft,
-        startTop: win.offsetTop
+        startTop: win.offsetTop,
+        element: titlebar
       };
     });
 

@@ -170,7 +170,7 @@ export const AboutMe = {
               <h3>About</h3>
               <p>Welcome to my Windows 98 inspired app! I'm an information systems graduate, programmer and a linguistic enthusiast.</p>
               <p style="margin-top: 8px;">I design and develop valueable software solutions for small businesses, service providers and events.</p>
-              <p style="margin-top: 8px;">This portfolio is a work in progress, showcasing my skills and projects.</p>
+              <p style="margin-top: 8px;">This portfolio is a work in progress, showcasing my projects.</p>
             </div>
 
             <div class="about-section">
@@ -182,52 +182,51 @@ export const AboutMe = {
           
           <div class="tab-panel" id="tab-skills">
             <div class="about-section">
-            <h3>Professional Stack</h3>
+            <h3>UI Technologies</h3>
               <div class="about-list">
-                <span class="about-tag">NextJs</span>
-                <span class="about-tag">Convex</span>
-                <span class="about-tag">Clerk Auth</span>
-              </div>
-            </div>
-            <div class="about-section">
-              <h3>Known Languages</h3>
-              <div class="about-list">
-                <span class="about-tag">Java</span>
-                <span class="about-tag">SQL</span>
-                <span class="about-tag">C#</span>
-                <span class="about-tag">TypeScript</span>
-                <span class="about-tag">Dart</span>
-                <span class="about-tag">HTML/CSS</span>
-                <span class="about-tag">Python</span>
-              </div>
-            </div>
-            
-            <div class="about-section">
-              <h3>Frameworks and Libraries</h3>
-              <div class="about-list">
-                <span class="about-tag">Angular</span>
-                <span class="about-tag">Flutter</span>
-                <span class="about-tag">Spring</span>
-                <span class="about-tag">React</span>
-                <span class="about-tag">Node.js</span>
-                <span class="about-tag">Vite</span>
                 <span class="about-tag">Astro</span>
+                <span class="about-tag">Next.js</span>
+                <span class="about-tag">React</span>
+                <span class="about-tag">Vue.js</span>
+                <span class="about-tag">Tailwind</span>
+                <span class="about-tag">GSAP</span>
+              </div>
+            </div>
+            <div class="about-section">
+            <h3>MVC Technologies</h3>
+              <div class="about-list">
+                <span class="about-tag">Node.js</span>
+                <span class="about-tag">Spring</span>
+                <span class="about-tag">Supabase</span>
+                <span class="about-tag">Convex</span>
+                <span class="about-tag">REST API</span>
+                <span class="about-tag">GraphQL</span>
+              </div>
+            </div>
+            <div class="about-section">
+            <h3>Known Languages</h3>
+              <div class="about-list">
+                <span class="about-tag">C#</span>
+                <span class="about-tag">Java</span>
+                <span class="about-tag">TypeScript</span>
+                <span class="about-tag">JavaScript</span>
+                <span class="about-tag">Python</span>
+                <span class="about-tag">HTML/CSS</span>
+                <span class="about-tag">SQL</span>
               </div>
             </div>
             
             <div class="about-section">
-              <h3>Tools</h3>
+              <h3>Other Tools</h3>
               <div class="about-list">
                 <span class="about-tag">Git</span>
-                <span class="about-tag">GitHub</span>
-                <span class="about-tag">MySQL</span>
+                <span class="about-tag">Docker</span>
+                <span class="about-tag">Figma</span>
+                <span class="about-tag">Opencode</span>
                 <span class="about-tag">AWS EC2</span>
-                <span class="about-tag">Vercel</span>
                 <span class="about-tag">Cloudflare</span>
                 <span class="about-tag">Postman</span>
-                <span class="about-tag">Figma</span>
-                <span class="about-tag">Docker</span>
-                <span class="about-tag">Wordpress</span>
+                <span class="about-tag">Linux</span>
               </div>
             </div>
           </div>
@@ -245,7 +244,7 @@ export const AboutMe = {
             <div class="about-section">
               <h3>Availability</h3>
               <p>Currently seeking new opportunities and collaborations.</p>
-              <p style="margin-top: 8px;">I'm not an expert in anything, matter of fact I'm actually just learning.</p>
+              <p style="margin-top: 8px;">I'm not an expert in anything, but eager to learn and grow, playing with oh-my-opencode a bit.</p>
               <p style="margin-top: 8px;">Feel free to reach out!</p>
             </div>
           </div>

@@ -714,6 +714,24 @@ export const Projects = {
           link: "https://easyfit-git-feature-mobile-ux-a1gbr.vercel.app?_vercel_share=dA56DwbIe0Zv46uEDtKYcUvJNDqr0LJn",
           created: "2024-01-10",
           modified: "2024-04-05"
+        },
+        {
+          name: "Autoscheduling Landing Page.url",
+          type: "url",
+          desc: "Landing page for Autoscheduling app - automated appointment scheduling system.",
+          tech: ["HTML", "CSS", "TypeScript", "Astro", "Convex", "Vercel"],
+          link: "https://site.a1gbr.com",
+          created: "2023-11-20",
+          modified: "2024-03-22",
+        },
+        {
+          name: "Admin Panel for the Autoscheduler System.url",
+          type: "url",
+          desc: "Admin panel for managing the Autoscheduling system. Built with T3 stack.",
+          tech: ["TypeScript", "Vite", "Tailwind", "Convex", "Clerk Auth", "Vercel"],
+          link: "https://app.a1gbr.com",
+          created: "2024-02-15",
+          modified: "2024-05-01",
         }
       ],
 
